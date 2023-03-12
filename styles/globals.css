@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: 'glitch';
+    src: url(../fonts/glitch_font.ttf);
+}
+
+.glitch {
+    font-family: glitch;
+}
+
+@font-face {
+    font-family: 'cyberpunk';
+    src: url(../fonts/cyberpunk_font.ttf);
+}
+
+.cyberpunk {
+    font-family: cyberpunk;
+}
