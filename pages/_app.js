@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import "../styles/animations.css"
 import "../styles/transition.css"
 import "../styles/cyberpunkButton.css"
+import "../styles/eventCard.css"
 
 import TransitionEffect from '../components/transitionEffect'
 
