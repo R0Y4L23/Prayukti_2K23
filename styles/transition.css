@@ -17,10 +17,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url(../public/assets/images/transition.jpg);
+    /* background: url(../public/assets/images/transition.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
+    background: rgb(4, 4, 4);
     z-index: -1;
 }
 

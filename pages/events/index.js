@@ -25,7 +25,7 @@ const Events = () => {
 
         return (
             <div className="slide-in-bck-center relative">
-                <div className='min-[1690px]:w-[100%] min-[1125px]:w-[150%] min-[845px]:w-[200%] min-[675px]:w-[250%] min-[675px]:w-[300%] min-[482px]:w-[350%] min-[375px]:w-[450%] w-[550%]'>
+                <div className='min-[1690px]:w-[100%] min-[1125px]:w-[150%] min-[845px]:w-[200%] min-[675px]:w-[250%] min-[550px]:w-[300%] min-[482px]:w-[350%] min-[375px]:w-[450%] w-[550%]'>
                 <video
                     className="z-0 video"
                     src={"assets/videos/events_background.mp4"}
@@ -40,7 +40,7 @@ const Events = () => {
                 <div className="absolute top-0 left-0 h-[100vh] w-full z-20">
                     <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-12 -translate-y-4">
                         <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[300px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
-                        <p className="text-white min-[550px]:text-[30px] text-[20px] uppercase font-[100] min-[550px]:tracking-[10px] text-xl cursor-pointer hover:tracking-[20px] hover:text-[40px] duration-500 cyberpunk" onClick={() => { router.push("/auth") }}>Sign In</p>
+                        <p className="text-white min-[550px]:text-[25px] text-[18px] uppercase font-[100] min-[550px]:tracking-[10px] cursor-pointer hover:tracking-[20px] hover:text-[40px] duration-500 glitch" onClick={() => { router.push("/auth") }}>Sign In</p>
                     </div>
                     <p className="text-center min-[1050px]:-mt-32 min-[778px]:-mt-24 min-[550px]:-mt-16 -mt-4 min-[550px]:text-[40px] text-[25px] text-white glitch tracking-[20px] hover:tracking-[25px] hover:text-[60px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To 3033...!</p>
                     <div className="w-full min-[650px]:flex flex-row mt-10 h-[350px] hidden">

@@ -2,10 +2,10 @@ import React from 'react'
 
 const CyberpunkButton = ({ text, className, onClick }) => {
     return (
-        <button class={"btn " + className} onClick={onClick}>
-            <span class="btn__content">{text}</span>
-            <span class="btn__glitch"></span>
-            <span class="btn__label">r25</span>
+        <button className={"btn " + className} onClick={onClick}>
+            <span className="btn__content">{text}</span>
+            <span className="btn__glitch"></span>
+            <span className="btn__label">r25</span>
         </button>
     )
 }

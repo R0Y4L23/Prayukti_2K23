@@ -24,9 +24,27 @@
     font-family: cyberpunk;
 }
 
+@font-face {
+    font-family: 'gravity';
+    src: url(../fonts/gravity_font.ttf);
+}
+
+.gravity {
+    font-family: gravity;
+}
+
 .video {
     height: 100%;
     width: 177.77777778vh; /* 100 * 16 / 9 */
     min-width: 100%;
     min-height: 56.25vw; /* 100 * 9 / 16 */
 }
+
+.home{
+    background: url(../public/assets/images/city_background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
