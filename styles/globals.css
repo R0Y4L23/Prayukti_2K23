@@ -47,4 +47,22 @@
     background-size: cover;
 }
 
+.authBg{
+    background: url(../public/assets/images/auth_background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.Ter_Green{
+    color:chartreuse
+}
+.Ter_Blue{
+    color:cyan
+}
+.Ter_Gray{
+    color: rgb(167, 166, 166);
+}
+
 

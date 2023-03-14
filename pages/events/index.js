@@ -10,12 +10,21 @@ const Events = () => {
     const [loading, setLoading] = useState(true)
     const [current,setCurrent]=useState(0)
     const [currentMobile,setCurrentMobile]=useState(0)
+    const [loggedIn,setLoggedIn]=useState(false)
 
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
         }, 4200)
     }, [])
+
+    useEffect(()=>{
+        let s=sessionStorage.getItem("token")
+        if(s)
+        {
+            setLoggedIn(true)
+        }
+    },[])
 
     const router = useRouter()
 
@@ -90,12 +99,22 @@ const Events = () => {
                     muted
                 />
                 </div>
-                <div className="absolute top-0 left-0 h-[100vh] w-full bg-black opacity-60 z-10">
+                <div className="absolute top-0 left-0 h-[100vh] w-full bg-black opacity-70 z-10">
                 </div>
                 <div className="absolute top-0 left-0 h-[100vh] w-full z-20">
                     <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-12 -translate-y-10">
                         <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[300px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
-                        <p className="text-white min-[550px]:text-[25px] text-[15px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[20px] min-[650px]:hover:text-[40px] duration-500 gravity" onClick={() => { router.push("/auth") }}>Sign In</p>
+                        <p className="text-white min-[550px]:text-[25px] text-[15px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[20px] min-[650px]:hover:text-[40px] duration-500 gravity" onClick={() => { 
+                            if(loggedIn)
+                            {
+                                sessionStorage.clear()
+                                router.push("/")
+                            }
+                            else
+                            {
+                            router.push("/auth") 
+                            }
+                            }}>{loggedIn?"Logout":"Login"}</p>
                     </div>
                     <p className="text-center min-[1050px]:-mt-32 min-[778px]:-mt-24 min-[550px]:-mt-16 -mt-20 min-[550px]:text-[40px] text-[20px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[25px] min-[650px]:hover:text-[60px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To 3033...!</p>
                     <div className="w-full min-[650px]:flex flex-row mt-10 h-[500px] hidden">
