@@ -8,6 +8,8 @@ import EventCard from '../../components/eventCard'
 const Events = () => {
 
     const [loading, setLoading] = useState(true)
+    const [current,setCurrent]=useState(0)
+    const [currentMobile,setCurrentMobile]=useState(0)
 
     useEffect(() => {
         setTimeout(() => {
@@ -16,6 +18,59 @@ const Events = () => {
     }, [])
 
     const router = useRouter()
+
+    const events=[
+        [["Requizzit","Level up your brains, and thrive on to win.","requizzit"],
+        ["Robowar","Combat with your bots, and let their best win","robowar"],
+        ["Lakshya","Reach your destination at your risk","lakshya"]],
+
+        [["Udaan","Be the pilot you always dreamt","udaan"],
+        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan"],
+        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts"]],
+
+        [["Code-Blooded","Code is poetry, let your Imagination run wild.","code"],
+        ["Overnite","Let the code leave your competitiors in the byte dust","overnite"],
+        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier"]],
+
+        [["LA-Photography","Let the lens do the talking of a story unknown","laphotography"],
+        ["Pradarshan","Let the creativity build around technology","pradarshan"],
+        ["Crescent","Whose bridge withstands the London Bridge?","crescent"]],
+
+        [["Naturgenix","Create from our natural foundations.","naturgenix"],
+        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope"],
+        ["HiTaTHON","","hitathon"]],
+
+        [["See-QL","","sql"],
+        ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames"],
+        ["Online Games","Coming Soon!","games"]],
+    ]
+
+    const events2=[
+
+        ["Requizzit","Level up your brains, and thrive on to win.","requizzit"],
+        ["Robowar","Combat with your bots, and let their best win","robowar"],
+        ["Lakshya","Reach your destination at your risk","lakshya"],
+
+        ["Udaan","Be the pilot you always dreamt","udaan"],
+        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan"],
+        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts"],
+
+        ["Code-Blooded","Code is poetry, let your Imagination run wild.","code"],
+        ["Overnite","Let the code leave your competitiors in the byte dust","overnite"],
+        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier"],
+
+        ["LA-Photography","Let the lens do the talking of a story unknown","laphotography"],
+        ["Pradarshan","Let the creativity build around technology","pradarshan"],
+        ["Crescent","Whose bridge withstands the London Bridge?","crescent"],
+
+        ["Naturgenix","Create from our natural foundations.","naturgenix"],
+        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope"],
+        ["HiTaTHON","","hitathon"],
+
+        ["See-QL","","sql"],
+        ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames"],
+        ["Online Games","Coming Soon!","games"],
+    ]
 
 
     if (loading) {
@@ -38,34 +93,34 @@ const Events = () => {
                 <div className="absolute top-0 left-0 h-[100vh] w-full bg-black opacity-60 z-10">
                 </div>
                 <div className="absolute top-0 left-0 h-[100vh] w-full z-20">
-                    <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-12 -translate-y-4">
+                    <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-12 -translate-y-10">
                         <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[300px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
-                        <p className="text-white min-[550px]:text-[25px] text-[18px] uppercase font-[100] min-[550px]:tracking-[10px] cursor-pointer hover:tracking-[20px] hover:text-[40px] duration-500 glitch" onClick={() => { router.push("/auth") }}>Sign In</p>
+                        <p className="text-white min-[550px]:text-[25px] text-[15px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[20px] min-[650px]:hover:text-[40px] duration-500 gravity" onClick={() => { router.push("/auth") }}>Sign In</p>
                     </div>
-                    <p className="text-center min-[1050px]:-mt-32 min-[778px]:-mt-24 min-[550px]:-mt-16 -mt-4 min-[550px]:text-[40px] text-[25px] text-white glitch tracking-[20px] hover:tracking-[25px] hover:text-[60px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To 3033...!</p>
-                    <div className="w-full min-[650px]:flex flex-row mt-10 h-[350px] hidden">
-                        <div className="min-[1050px]:w-[70%] min-[778px]:w-[60%] w-[50%] grid min-[1150px]:grid-cols-3 min-[900px]:grid-cols-2 grid-cols-1 pt-5 min-[1250px]:pl-20 pl-5">
+                    <p className="text-center min-[1050px]:-mt-32 min-[778px]:-mt-24 min-[550px]:-mt-16 -mt-20 min-[550px]:text-[40px] text-[20px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[25px] min-[650px]:hover:text-[60px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To 3033...!</p>
+                    <div className="w-full min-[650px]:flex flex-row mt-10 h-[500px] hidden">
+                        <div className="min-[1050px]:w-[70%] min-[778px]:w-[60%] w-[50%] grid min-[1150px]:grid-cols-3 min-[900px]:grid-cols-2 grid-cols-1 pt-5 min-[1250px]:pl-10 pl-5">
                             <div>
-                            <EventCard/>
+                            <EventCard eventName={events[current][0][0]} eventTagline={events[current][0][1]} eventImage={events[current][0][2]} />
                             </div>
                             <div className='min-[900px]:block hidden'>
-                            <EventCard/>
+                            <EventCard eventName={events[current][1][0]} eventTagline={events[current][1][1]} eventImage={events[current][1][2]}/>
                             </div>
                             <div className='min-[1150px]:block hidden'>
-                            <EventCard/>
+                            <EventCard eventName={events[current][2][0]} eventTagline={events[current][2][1]} eventImage={events[current][2][2]}/>
                             </div> 
                         </div>
                         <div className="min-[1050px]:w-[30%] min-[778px]:w-[40%] w-[50%] flex flex-col gap-10 justify-center items-center">
-                            <CyberpunkButton text={"Next_"} className={'ml-20'} />
-                            <CyberpunkButton text={"_Previous"} />
+                            <CyberpunkButton text={"Next_"} className={'ml-20'} onClick={()=>{if(current<5)setCurrent(current+1)}}/>
+                            <CyberpunkButton text={"_Previous"} onClick={()=>{if(current!=0)setCurrent(current-1)}} />
                         </div>
                     </div>
-                    <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px] -mt-10'>
-                    <EventCard/>
+                    <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]'>
+                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]}/>
                     </div>
-                    <div className='min-[650px]:hidden flex min-[500px]:flex-row flex-col justify-center items-center min-[500px]:gap-10 gap-4 -mt-12'>
-                        <CyberpunkButton text={"_Previous"} />
-                        <CyberpunkButton text={"Next_"}  />
+                    <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4'>
+                        <CyberpunkButton text={"_Previous"} onClick={()=>{if(currentMobile!=0)setCurrentMobile(currentMobile-1)}}/>
+                        <CyberpunkButton text={"Next_"}  onClick={()=>{if(currentMobile<17)setCurrentMobile(currentMobile+1)}}/>
                     </div>
                 </div>
             </div>
