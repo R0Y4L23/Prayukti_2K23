@@ -26,10 +26,11 @@ const Events = () => {
         }
     },[])
 
-    const router = useRouter()
+    const router = useRouter();
 
     const events=[
-        [["Requizzit","Level up your brains, and thrive on to win.","requizzit",0],
+        [[
+            "Requizzit","Level up your brains, and thrive on to win.","requizzit",18],
         ["Robowar","Combat with your bots, and let their best win","robowar",1],
         ["Lakshya","Reach your destination at your risk","lakshya",2]],
 
@@ -81,6 +82,7 @@ const Events = () => {
         ["Online Games","Coming Soon!","games"],
     ]
 
+    console.log(events[0][0])
 
     if (loading) {
         return <Loading2 />
@@ -137,7 +139,7 @@ const Events = () => {
                         </div>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]'>
-                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile}/>
+                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile==0?18:currentMobile}/>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4'>
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(currentMobile!=0)setCurrentMobile(currentMobile-1)}}/>
