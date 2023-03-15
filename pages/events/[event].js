@@ -1,8 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react'
 import CyberpunkButton from '../../components/cyberpunkButton'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useRouter } from 'next/router';
+
+import { firestore } from '../../firebase/config'
+import {doc,onSnapshot,updateDoc} from "firebase/firestore"
 
 const EventsPage = () => {
 
@@ -10,7 +14,29 @@ const EventsPage = () => {
 
 const [tabIndex, setTabIndex] = useState(0);
 
+const [eventRegistered,setEventRegistered]=useState([])
+
 const id= Number(router.asPath.replace("/events/",""))
+
+const [loggedIn,setLoggedIn]=useState(false)
+const [uid,setUid]=useState("")
+
+useEffect(()=>{
+    console.log(id)
+    let s=sessionStorage.getItem("token")
+    if(s)
+    {
+        setLoggedIn(true)
+        let u=sessionStorage.getItem("id")
+        setUid(u)
+        onSnapshot(doc(firestore, "Users", u), (doc) => {
+            console.log(doc.data())
+            setEventRegistered(doc.data().events)             
+        });
+    }
+},[])
+
+
 
 const events=[
     ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year."],
@@ -32,6 +58,34 @@ const events=[
     ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",""],
     ["Online Games","Coming Soon!","games","Coming Soon!"]
 ]
+
+const addEvent=async ()=>{
+    console.log("Adding")
+    let e=eventRegistered
+    e.push(id)
+    setEventRegistered(e)
+    await updateDoc(doc(firestore,"Users",uid),{
+        events:e
+    })
+}
+
+const removeEvent=async ()=>{
+    console.log("Removing")
+    let e=eventRegistered
+    let a=[]
+    for(let i=0;i<e.length;i++)
+    {
+        if(e[i]!=id)
+        {
+            a.push(e[i])
+        }
+    }
+    setEventRegistered(a)
+    await updateDoc(doc(firestore,"Users",uid),{
+        events:a
+    })
+}
+
 
 if(!id)
 {
@@ -58,7 +112,17 @@ return (
             <p className='text-4xl text-center text-white underline'>{events[id][0]}:</p>
             <p className='text-xl text-center text-white'>{events[id][1]}</p>
             <p className='text-center text-white'>{events[id][3]}</p>
-            <CyberpunkButton text={"Add Event"} />
+            {loggedIn&&<><CyberpunkButton text={ eventRegistered.includes(id)?"Remove Event":"Add Event"} onClick={()=>{
+                console.log("Clicked")
+                if(eventRegistered.includes(id))
+                {
+                    removeEvent()
+                }
+                else
+                {
+                    addEvent()
+                }
+            }}/><CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
         </div>
     </div>
     <div className='min-[1080px]:hidden block z-20 -translate-y-1'>
@@ -85,7 +149,18 @@ return (
             </TabPanel>
             <TabPanel>
                 <div  className={"flex flex-row justify-center items-center mt-10 w-full"}>
-                 <CyberpunkButton text={"Add Event"} className="mx-auto" />
+                 {loggedIn&&<><CyberpunkButton text={eventRegistered.includes(id)?"Remove Event":"Add Event"} className="mx-auto" onClick={()=>{
+                     console.log("Clicked")
+                    if(eventRegistered.includes(id))
+                    {
+                        removeEvent()
+                    }
+                    else
+                    {
+                        addEvent()
+                    }
+
+                 }}/><CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
                  </div>
             </TabPanel>
         </Tabs>

@@ -75,7 +75,9 @@ const Auth = () => {
                     college_name:value6,
                     roll:value7,
                     year:value8,
-                    contact:value9
+                    contact:value9,
+                    events:[],
+                    payment:""
                 })
 
                 router.replace("/event")

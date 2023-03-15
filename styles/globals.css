@@ -63,6 +63,14 @@
 
 }
 
+.profilePageBg{
+    background: url(../public/assets/images/profile_bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
 .Ter_Green{
     color:chartreuse
 }
