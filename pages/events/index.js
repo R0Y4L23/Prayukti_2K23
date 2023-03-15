@@ -102,8 +102,8 @@ const Events = () => {
                 <div className="absolute top-0 left-0 h-[100vh] w-full bg-black opacity-70 z-10">
                 </div>
                 <div className="absolute top-0 left-0 h-[100vh] w-full z-20">
-                    <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-12 -translate-y-10">
-                        <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[300px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
+                    <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-4 -translate-y-2">
+                        <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[150px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
                         <p className="text-white min-[550px]:text-[25px] text-[15px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[20px] min-[650px]:hover:text-[40px] duration-500 gravity" onClick={() => { 
                             if(loggedIn)
                             {
@@ -116,8 +116,11 @@ const Events = () => {
                             }
                             }}>{loggedIn?"Logout":"Login"}</p>
                     </div>
-                    <p className="text-center min-[1050px]:-mt-32 min-[778px]:-mt-24 min-[550px]:-mt-16 -mt-20 min-[550px]:text-[40px] text-[20px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[25px] min-[650px]:hover:text-[60px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To 3033...!</p>
+                    <p className="text-center min-[1050px]:-mt-4 min-[778px]:-mt-20 min-[550px]:-mt-12 -mt-8 min-[550px]:text-[20px] text-[12px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[10px] min-[650px]:hover:text-[25px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To The Era Of Virtual Veda</p>
                     <div className="w-full min-[650px]:flex flex-row mt-10 h-[500px] hidden">
+                        <div className="min-[1050px]:w-[15%] min-[778px]:w-[20%] w-[25%] flex flex-col justify-center items-center">
+                        <CyberpunkButton text={"_Previous"} onClick={()=>{if(current!=0)setCurrent(current-1)}} />
+                        </div>
                         <div className="min-[1050px]:w-[70%] min-[778px]:w-[60%] w-[50%] grid min-[1150px]:grid-cols-3 min-[900px]:grid-cols-2 grid-cols-1 pt-5 min-[1250px]:pl-10 pl-5">
                             <div>
                             <EventCard eventName={events[current][0][0]} eventTagline={events[current][0][1]} eventImage={events[current][0][2]} />
@@ -129,9 +132,8 @@ const Events = () => {
                             <EventCard eventName={events[current][2][0]} eventTagline={events[current][2][1]} eventImage={events[current][2][2]}/>
                             </div> 
                         </div>
-                        <div className="min-[1050px]:w-[30%] min-[778px]:w-[40%] w-[50%] flex flex-col gap-10 justify-center items-center">
-                            <CyberpunkButton text={"Next_"} className={'ml-20'} onClick={()=>{if(current<5)setCurrent(current+1)}}/>
-                            <CyberpunkButton text={"_Previous"} onClick={()=>{if(current!=0)setCurrent(current-1)}} />
+                        <div className="min-[1050px]:w-[15%] min-[778px]:w-[20%] w-[25%] flex flex-col justify-center items-center">
+                            <CyberpunkButton text={"Next_"} onClick={()=>{if(current<5)setCurrent(current+1)}}/>
                         </div>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]'>

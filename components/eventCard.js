@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import React,{useEffect,useState} from 'react'
+import { useRouter } from 'next/router'
 
 const EventCard = ({eventName,eventImage,eventTagline}) => {
 
 
   const [loading, setLoading] = useState(true)
+
+  const router=useRouter()
 
   useEffect(()=>{
     setTimeout(()=>{
@@ -13,17 +16,13 @@ const EventCard = ({eventName,eventImage,eventTagline}) => {
   },[])
 
   return (
-    <div className="card-border cursor-pointer">
+    <div className="card-border cursor-pointer" onClick={()=>{router.push("/events/requizzit")}}>
     <div className="card-bg"> 
       <div >
         <div>
-          {/* <span className="Loading">Loading Loading Loading Loading</span>
-          <span className="Loading">Loading Loading Loading Loading</span>
-          <span className="Loading">Loading Loading Loading Loading</span> */}
-          <img src={"assets/images/events/"+eventImage+".jpg"} alt='event' className=''/>
+          <img src={"assets/images/events/"+eventImage+".jpg"} alt='event' className='h-[220px]'/>
         </div>
       </div>
-      
     </div>
     <div className="mist-container">
       <div className="mist"></div>

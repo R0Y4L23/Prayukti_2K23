@@ -55,6 +55,14 @@
 
 }
 
+.eventsPageBg{
+    background: url(../public/assets/images/events_page_bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
 .Ter_Green{
     color:chartreuse
 }

@@ -10,10 +10,10 @@ import { doc, setDoc } from "firebase/firestore";
 
 const TerminalText=({value,admin})=>{
     return(
-        <p className="min-[425px]:text-base text-sm break-words"><span class="Ter_Green">{admin?"Admin":'User'}</span>
-    <span class="Ter_Gray">:</span>
-    <span class="Ter_Blue">~/Prayukti/Website</span>
-    <span class="Ter_Gray mr-1">$</span ><span className='text-white'>{value}</span></p>
+        <p className="min-[425px]:text-base text-sm break-words"><span className="Ter_Green">{admin?"Admin":'User'}</span>
+    <span className="Ter_Gray">:</span>
+    <span className="Ter_Blue">~/Prayukti/Website</span>
+    <span className="Ter_Gray mr-1">$</span ><span className='text-white'>{value}</span></p>
 
     )
 }
@@ -31,6 +31,21 @@ const Auth = () => {
     const [value7,setValue7]=useState("")
     const [value8,setValue8]=useState("")
     const [value9,setValue9]=useState("")
+
+    const [emailPromt,setEmailPrompt]=useState("Please Enter Your Email")
+    const [confirmPasswordPrompt,setConfirmPasswordPrompt]=useState("Please Confirm Your Password")
+
+    const validateEmail=(s)=>{
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if(s.match(validRegex))
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
 
     const [step,setStep]=useState(1)
 
@@ -78,7 +93,19 @@ const Auth = () => {
         {
             if(value1.toLowerCase()=="l")
             {
-                if(step==3)
+                if(step==2)
+                {
+                    if(!validateEmail(value2))
+                    {
+                        setEmailPrompt("Please Enter Valid Email")
+                        setValue2("")
+                    }
+                    else
+                    {
+                        setStep(step+1)
+                    }
+                }
+                else if(step==3)
                 {
                     authFunction()
                 }
@@ -89,7 +116,31 @@ const Auth = () => {
             }
             else
             {
-                if(step==9)
+                if(step==2)
+                {
+                    if(!validateEmail(value2))
+                    {
+                        setEmailPrompt("Please Enter Valid Email")
+                        setValue2("")
+                    }
+                    else
+                    {
+                        setStep(step+1)
+                    }
+                }
+                else if(step==4)
+                {
+                    if(value3==value4)
+                    {
+                        setStep(step+1)
+                    }
+                    else
+                    {
+                        setConfirmPasswordPrompt("Password is not equal to Confirm Password. Please Enter Correctly.")
+                        setValue4("")
+                    }
+                }
+                else if(step==9)
                 {
                     authFunction()
                 }
@@ -124,19 +175,19 @@ const Auth = () => {
             <div className='bg-black min-[768px]:w-2/3 min-[535px]:w-4/5 w-[95%] h-[650px] bg-opacity-50 z-10 relative'>
                 <TerminalText admin={true} value={"Press R to Register or Press L to Login"}/>
                 <TerminalText admin={false} value={value1}/>
-                {step>=2&&<TerminalText admin={true} value={"Please Enter Your Email."}/>}
+                {step>=2&&<TerminalText admin={true} value={emailPromt}/>}
                 {step>=2&&<TerminalText admin={false} value={value2}/>}
-                {step>=3&&<TerminalText admin={true} value={"Please Enter Your Password."}/>}
+                {step>=3&&<TerminalText admin={true} value={"Please Enter Your Password"}/>}
                 {step>=3&&<TerminalText admin={false} value={"*".repeat(value3.length)}/>}
-                {step>=4&&<TerminalText admin={true} value={"Please Confirm Your Password"}/>}
+                {step>=4&&<TerminalText admin={true} value={confirmPasswordPrompt}/>}
                 {step>=4&&<TerminalText admin={false} value={"*".repeat(value4.length)}/>}
                 {step>=5&&<TerminalText admin={true} value={"Please Enter Your Name"}/>}
                 {step>=5&&<TerminalText admin={false} value={value5}/>}
                 {step>=6&&<TerminalText admin={true} value={"Please Enter Your College Name"}/>}
                 {step>=6&&<TerminalText admin={false} value={value6}/>}
-                {step>=7&&<TerminalText admin={true} value={"Please Enter Your College Roll Number."}/>}
+                {step>=7&&<TerminalText admin={true} value={"Please Enter Your College Roll Number"}/>}
                 {step>=7&&<TerminalText admin={false} value={value7}/>}
-                {step>=8&&<TerminalText admin={true} value={"Please Enter Your Year"}/>}
+                {step>=8&&<TerminalText admin={true} value={"Please Enter Your Year [1st/2nd/3rd/4th]"}/>}
                 {step>=8&&<TerminalText admin={false} value={value8}/>}
                 {step>=9&&<TerminalText admin={true} value={"Please Enter Your Contact Number"}/>}
                 {step>=9&&<TerminalText admin={false} value={value9}/>}
