@@ -2,11 +2,10 @@
 import React,{useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
 
-const EventCard = ({eventName,eventImage,eventTagline}) => {
+const EventCard = ({eventName,eventImage,eventTagline,index}) => {
 
 
   const [loading, setLoading] = useState(true)
-
   const router=useRouter()
 
   useEffect(()=>{
@@ -16,7 +15,7 @@ const EventCard = ({eventName,eventImage,eventTagline}) => {
   },[])
 
   return (
-    <div className="card-border cursor-pointer" onClick={()=>{router.push("/events/requizzit")}}>
+    <div className="card-border cursor-pointer" onClick={()=>{router.push("/events/"+index)}}>
     <div className="card-bg"> 
       <div >
         <div>

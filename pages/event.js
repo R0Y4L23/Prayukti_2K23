@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react'
-import Loading2 from '../../components/loading2'
+import Loading2 from '../components/loading2'
 import { useRouter } from 'next/router'
-import CyberpunkButton from '../../components/cyberpunkButton'
-import EventCard from '../../components/eventCard'
+import CyberpunkButton from '../components/cyberpunkButton'
+import EventCard from '../components/eventCard'
 
 const Events = () => {
 
@@ -29,29 +29,29 @@ const Events = () => {
     const router = useRouter()
 
     const events=[
-        [["Requizzit","Level up your brains, and thrive on to win.","requizzit"],
-        ["Robowar","Combat with your bots, and let their best win","robowar"],
-        ["Lakshya","Reach your destination at your risk","lakshya"]],
+        [["Requizzit","Level up your brains, and thrive on to win.","requizzit",0],
+        ["Robowar","Combat with your bots, and let their best win","robowar",1],
+        ["Lakshya","Reach your destination at your risk","lakshya",2]],
 
-        [["Udaan","Be the pilot you always dreamt","udaan"],
-        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan"],
-        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts"]],
+        [["Udaan","Be the pilot you always dreamt","udaan",3],
+        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan",4],
+        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts",5]],
 
-        [["Code-Blooded","Code is poetry, let your Imagination run wild.","code"],
-        ["Overnite","Let the code leave your competitiors in the byte dust","overnite"],
-        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier"]],
+        [["Code-Blooded","Code is poetry, let your Imagination run wild.","code",6],
+        ["Overnite","Let the code leave your competitiors in the byte dust","overnite",7],
+        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier",8]],
 
-        [["LA-Photography","Let the lens do the talking of a story unknown","laphotography"],
-        ["Pradarshan","Let the creativity build around technology","pradarshan"],
-        ["Crescent","Whose bridge withstands the London Bridge?","crescent"]],
+        [["LA-Photography","Let the lens do the talking of a story unknown","laphotography",9],
+        ["Pradarshan","Let the creativity build around technology","pradarshan",10],
+        ["Crescent","Whose bridge withstands the London Bridge?","crescent",11]],
 
-        [["Naturgenix","Create from our natural foundations.","naturgenix"],
-        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope"],
-        ["HiTaTHON","","hitathon"]],
+        [["Naturgenix","Create from our natural foundations.","naturgenix",12],
+        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope",13],
+        ["HiTaTHON","","hitathon",14]],
 
-        [["See-QL","","sql"],
-        ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames"],
-        ["Online Games","Coming Soon!","games"]],
+        [["See-QL","","sql",15],
+        ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",16],
+        ["Online Games","Coming Soon!","games",17]],
     ]
 
     const events2=[
@@ -123,13 +123,13 @@ const Events = () => {
                         </div>
                         <div className="min-[1050px]:w-[70%] min-[778px]:w-[60%] w-[50%] grid min-[1150px]:grid-cols-3 min-[900px]:grid-cols-2 grid-cols-1 pt-5 min-[1250px]:pl-10 pl-5">
                             <div>
-                            <EventCard eventName={events[current][0][0]} eventTagline={events[current][0][1]} eventImage={events[current][0][2]} />
+                            <EventCard eventName={events[current][0][0]} eventTagline={events[current][0][1]} eventImage={events[current][0][2]} index={events[current][0][3]} />
                             </div>
                             <div className='min-[900px]:block hidden'>
-                            <EventCard eventName={events[current][1][0]} eventTagline={events[current][1][1]} eventImage={events[current][1][2]}/>
+                            <EventCard eventName={events[current][1][0]} eventTagline={events[current][1][1]} eventImage={events[current][1][2]} index={events[current][1][3]}/>
                             </div>
                             <div className='min-[1150px]:block hidden'>
-                            <EventCard eventName={events[current][2][0]} eventTagline={events[current][2][1]} eventImage={events[current][2][2]}/>
+                            <EventCard eventName={events[current][2][0]} eventTagline={events[current][2][1]} eventImage={events[current][2][2]} index={events[current][2][3]}/>
                             </div> 
                         </div>
                         <div className="min-[1050px]:w-[15%] min-[778px]:w-[20%] w-[25%] flex flex-col justify-center items-center">
@@ -137,7 +137,7 @@ const Events = () => {
                         </div>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]'>
-                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]}/>
+                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile}/>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4'>
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(currentMobile!=0)setCurrentMobile(currentMobile-1)}}/>

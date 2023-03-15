@@ -4,6 +4,8 @@ import "../styles/transition.css"
 import "../styles/cyberpunkButton.css"
 import "../styles/eventCard.css"
 
+import 'react-tabs/style/react-tabs.css';
+
 import Head from 'next/head'
 
 import TransitionEffect from '../components/transitionEffect'

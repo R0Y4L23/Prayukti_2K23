@@ -56,7 +56,7 @@ const Auth = () => {
                 sessionStorage.setItem("user",JSON.stringify(u.user))
                 sessionStorage.setItem("token",u.user.refreshToken)
                 sessionStorage.setItem("id",u.user.uid)
-                router.replace("/events")
+                router.replace("/event")
             }).catch((e)=>{
                 console.log(e.message)
             })
@@ -78,14 +78,14 @@ const Auth = () => {
                     contact:value9
                 })
 
-                router.replace("/events")
+                router.replace("/event")
 
             }).catch((e)=>{
                 console.log(e.message)
             })
 
         }
-        router.replace("/events")
+        router.replace("/event")
     }
 
     const stepFunction=()=>{
