@@ -37,7 +37,8 @@ const Profile = () => {
         ["HiTaTHON","","hitathon",""],
         ["See-QL","","sql",""],
         ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",""],
-        ["Online Games","Coming Soon!","games","Coming Soon!"]
+        ["Online Games","Coming Soon!","games","Coming Soon!"],
+         ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year."]
     ]
 
 
