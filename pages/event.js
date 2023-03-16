@@ -4,6 +4,7 @@ import Loading2 from '../components/loading2'
 import { useRouter } from 'next/router'
 import CyberpunkButton from '../components/cyberpunkButton'
 import EventCard from '../components/eventCard'
+import Head from 'next/head'
 
 const Events = () => {
 
@@ -90,6 +91,10 @@ const Events = () => {
     else {
 
         return (
+            <>
+            <Head>
+                <title>Events</title>
+            </Head>
             <div className="slide-in-bck-center relative">
                 <div className='min-[1690px]:w-[100%] min-[1125px]:w-[150%] min-[845px]:w-[200%] min-[675px]:w-[250%] min-[550px]:w-[300%] min-[482px]:w-[350%] min-[375px]:w-[450%] w-[550%]'>
                 <video
@@ -141,12 +146,13 @@ const Events = () => {
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]'>
                     <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile==0?18:currentMobile}/>
                     </div>
-                    <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4'>
+                    <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4 abc'>
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(currentMobile!=0)setCurrentMobile(currentMobile-1)}}/>
                         <CyberpunkButton text={"Next_"}  onClick={()=>{if(currentMobile<17)setCurrentMobile(currentMobile+1)}}/>
                     </div>
                 </div>
             </div>
+            </>
         )
     }
 }

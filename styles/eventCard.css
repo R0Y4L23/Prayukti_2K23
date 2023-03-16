@@ -147,3 +147,13 @@ svg {
     transform: translate3d(var(--move-final), 0, 0);
   }
 }
+
+@media screen and (max-height:680px) {
+  .eventcard{
+    scale: 65%;
+    margin-top: -130px;
+  } 
+  .abc{
+    margin-top: -140px;
+  }
+}

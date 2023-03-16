@@ -81,4 +81,9 @@
     color: rgb(167, 166, 166);
 }
 
-
+@media screen and (max-height:600px) {
+    .authSize{
+      scale: 75%;
+      margin-top: -50px;
+    } 
+  }

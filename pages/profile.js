@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React,{useState,useEffect} from 'react'
 
@@ -7,9 +8,16 @@ import {doc,onSnapshot,updateDoc} from "firebase/firestore"
 import {  ref, uploadBytes,getDownloadURL } from "firebase/storage";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import Head from 'next/head';
+import { toast } from 'react-toastify';
+
+import { useRouter } from 'next/router';
+
 const Profile = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
+
+    const router=useRouter()
 
     const events=[
         ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year."],
@@ -40,10 +48,18 @@ const Profile = () => {
 
     useEffect(()=>{
         let u=sessionStorage.getItem("id")
-        setUid(u)
-        onSnapshot(doc(firestore, "Users", u), (doc) => {
+        if(u)
+        {
+            setUid(u)
+            onSnapshot(doc(firestore, "Users", u), (doc) => {
             setProfileDetails(doc.data())          
         });
+        }
+        else
+        {
+            toast.error("Please Login First")
+            router.replace("/auth")
+        }
     },[])
 
     const register=async ()=>{
@@ -55,17 +71,21 @@ const Profile = () => {
             await updateDoc(doc(firestore,"Users",uid),{
                 payment:url
             })
+            toast.success("You Have Successfully Registered For The Events")
         })
         });
     }
 
 
   return (
+    <>
+    <Head>
+        <title>My Profile</title>
+    </Head>
     <div className='profilePageBg w-full min-h-screen'>
         <div className='absolute top-0 bg-black h-screen w-full bg-opacity-60'>
         </div>
         <div className='w-full h-[500px] min-[800px]:flex flex-row hidden justify-evenly items-center z-20 translate-y-10 mt-12'>
-       
             {profileDetails&&
             <div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}}  className='w-[30%] h-full bg-white rounded-[15px] flex flex-col justify-center relative px-5 gap-5'>
                 <p className='text-center text-2xl underline font-mono absolute top-5'>Profile Details</p>
@@ -76,11 +96,9 @@ const Profile = () => {
                 <p className='text-lg  font-mono'>ROLL NO. : {profileDetails.roll}</p>
                 <p className='text-lg  font-mono'>YEAR : {profileDetails.year}</p>
             </div>}
-
             <div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}}  className='w-[30%] h-full bg-white rounded-[15px] flex flex-col justify-center items-center'>
                 <img src='assets/images/qr.png' className='w-[300px] h-[300px]' alt='qr'/>
             </div>
-
             {profileDetails&&<div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}} className='w-[30%] h-full bg-white rounded-[15px] flex flex-col justify-center relative px-5 gap-1'>
                 <p className='text-center text-2xl underline font-mono absolute top-5'>Events Added</p>
                 {profileDetails&&
@@ -147,6 +165,7 @@ const Profile = () => {
             </TabPanel>
         </Tabs>
     </div>
+    </>
   )
 }
 

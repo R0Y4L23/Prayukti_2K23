@@ -5,6 +5,9 @@ import "../styles/cyberpunkButton.css"
 import "../styles/eventCard.css"
 
 import 'react-tabs/style/react-tabs.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { ToastContainer } from 'react-toastify'
 
 import Head from 'next/head'
 
@@ -19,6 +22,20 @@ function MyApp({ Component, pageProps }) {
 </Head>
   <TransitionEffect>
     <Component {...pageProps} />
+    <ToastContainer
+
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+    
+    />
   </TransitionEffect>
   </>
     

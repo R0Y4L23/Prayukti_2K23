@@ -8,18 +8,18 @@ import { useRouter } from 'next/router';
 import { firestore } from '../../firebase/config'
 import {doc,onSnapshot,updateDoc} from "firebase/firestore"
 
+import Head from 'next/head';
+import { toast } from 'react-toastify';
+
 const EventsPage = () => {
 
-    const router=useRouter()
-
+const router=useRouter()
 const [tabIndex, setTabIndex] = useState(0);
-
 const [eventRegistered,setEventRegistered]=useState([])
-
 const id= Number(router.asPath.replace("/events/",""))
-
 const [loggedIn,setLoggedIn]=useState(false)
 const [uid,setUid]=useState("")
+const [isPaid,setIsPaid]=useState(false)
 
 useEffect(()=>{
     console.log(id)
@@ -31,7 +31,11 @@ useEffect(()=>{
         setUid(u)
         onSnapshot(doc(firestore, "Users", u), (doc) => {
             console.log(doc.data())
-            setEventRegistered(doc.data().events)             
+            setEventRegistered(doc.data().events) 
+            if(doc.data().payment.length>0)
+            {
+                setIsPaid(true)
+            }            
         });
     }
 },[])
@@ -69,6 +73,7 @@ const addEvent=async ()=>{
     await updateDoc(doc(firestore,"Users",uid),{
         events:e
     })
+    toast.success("Successfully Added An Event")
 }
 
 const removeEvent=async ()=>{
@@ -86,6 +91,7 @@ const removeEvent=async ()=>{
     await updateDoc(doc(firestore,"Users",uid),{
         events:a
     })
+    toast.success("Successfully Removed An Event")
 }
 
 
@@ -96,6 +102,11 @@ if(!id)
 else
 {
 return (
+    <>
+    <Head>
+        <title>{events[id][0]}</title>
+    </Head>
+   
 <div className='eventsPageBg w-full min-h-screen'>
     <div className='absolute top-0 bg-black h-screen w-full bg-opacity-60'>
     </div>
@@ -114,7 +125,7 @@ return (
             <p className='text-4xl text-center text-white underline'>{events[id][0]}:</p>
             <p className='text-xl text-center text-white'>{events[id][1]}</p>
             <p className='text-center text-white'>{events[id][3]}</p>
-            {loggedIn&&<><CyberpunkButton text={ eventRegistered.includes(id)?"Remove Event":"Add Event"} onClick={()=>{
+            {loggedIn&&<>{!isPaid&&<CyberpunkButton text={ eventRegistered.includes(id)?"Remove Event":"Add Event"} onClick={()=>{
                 console.log("Clicked")
                 if(eventRegistered.includes(id))
                 {
@@ -124,7 +135,7 @@ return (
                 {
                     addEvent()
                 }
-            }}/><CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
+            }}/>}<CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
         </div>
     </div>
     <div className='min-[1080px]:hidden block z-20 -translate-y-1'>
@@ -132,9 +143,10 @@ return (
         <p className='text-xl text-center text-white my-3'>{events[id][1]}</p>
         <Tabs className='mt-5'selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
             <TabList className={"flex flex-row justify-center border-b border-white"}>
-                <Tab><p className={tabIndex==0?'text-xl text-black':'text-xl text-white'}>Event</p></Tab>
-                <Tab><p className={tabIndex==1?'text-xl text-black':'text-xl text-white'}>Details</p></Tab>
-                <Tab><p className={tabIndex==2?'text-xl text-black':'text-xl text-white'}>Register</p></Tab>
+                <Tab><p className={tabIndex==0?'min-[375px]:text-xl text-lg text-black':'min-[375px]:text-xl text-lg text-white'}>Event</p></Tab>
+                <Tab><p className={tabIndex==1?'min-[375px]:text-xl text-lg text-black':'min-[375px]:text-xl text-lg text-white'}>Details</p></Tab>
+                <Tab><p className={tabIndex==2?'min-[375px]:text-xl text-lg text-black':'min-[375px]:text-xl text-lg text-white'}>Register</p></Tab>
+                <Tab><p className={tabIndex==3?'min-[375px]:text-xl text-lg text-black':'min-[375px]:text-xl text-lg text-white'}>Rules</p></Tab>
             </TabList>
             <TabPanel className={"flex flex-col justify-center items-center"}>
             <img src={'/assets/images/events/'+events[id][2]+'.jpg'} alt='event-page' className='mx-auto w-[300px] rounded-[15px] mt-10' />
@@ -147,11 +159,11 @@ return (
             </div> */}
             </TabPanel>
             <TabPanel>
-            <p className='text-center text-white min-[700px]:text-[20px] min-[470px]:text-[14px] text-[12px]'>{events[id][3]}</p>
+            <p className='text-center text-white min-[700px]:text-[20px] min-[470px]:text-[16px] text-[12px] mt-5 mx-5'>{events[id][3]}</p>
             </TabPanel>
             <TabPanel>
                 <div  className={"flex flex-row justify-center items-center mt-10 w-full"}>
-                 {loggedIn&&<><CyberpunkButton text={eventRegistered.includes(id)?"Remove Event":"Add Event"} className="mx-auto" onClick={()=>{
+                 {loggedIn&&<>{!isPaid&&<CyberpunkButton text={eventRegistered.includes(id)?"Remove Event":"Add Event"} className="mx-auto" onClick={()=>{
                      console.log("Clicked")
                     if(eventRegistered.includes(id))
                     {
@@ -161,13 +173,17 @@ return (
                     {
                         addEvent()
                     }
-
-                 }}/><CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
+                 }}/>}<CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
+                 {!loggedIn&&<p className='text-center text-white'>Please Login To Add Events</p>}
                  </div>
+            </TabPanel>
+            <TabPanel>
+            <p className='text-center text-white min-[700px]:text-[20px] min-[470px]:text-[16px] text-[12px] mt-5 mx-5'>Coming Soon...</p>
             </TabPanel>
         </Tabs>
     </div>
 </div>
+</>
 )
         }
 

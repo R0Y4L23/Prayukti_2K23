@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Loading from '../components/loading'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const Index = () => {
   const [loading, setLoading] = useState(true)
@@ -29,6 +30,10 @@ const Index = () => {
   else {
 
     return (
+      <>
+      <Head>
+        <title>Prayukti | Riviera</title>
+      </Head>
       <div className="slide-in-bck-center home relative min-h-screen"> 
        <div className='absolute top-0 bg-black h-screen w-full bg-opacity-40'>
          </div>    
@@ -73,6 +78,7 @@ const Index = () => {
           <a href='https://instagram.com/rivierahit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-pink-400 cursor-pointer"></i></a>
           </div>
       </div>
+      </>
     )
   }
 }
