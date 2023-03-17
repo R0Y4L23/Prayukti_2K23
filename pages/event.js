@@ -17,7 +17,7 @@ const Events = () => {
     const [touchEnd, setTouchEnd] = useState(null)
 
 // the required distance between touchStart and touchEnd to be detected as a swipe
-const minSwipeDistance = 50 
+const minSwipeDistance = 40 
 
 const onTouchStart = (e) => {
   setTouchEnd(null) // otherwise the swipe is fired even with usual touch events

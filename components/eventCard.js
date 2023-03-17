@@ -14,6 +14,7 @@ const EventCard = ({eventName,eventImage,eventTagline,index}) => {
   const [eventRegistered,setEventRegistered]=useState([])
   const [isPaid,setIsPaid]=useState(false)
   const [uid,setUid]=useState("")
+  const [isAlumni,setIsAlumni]=useState(false)
 
   useEffect(()=>{
     let s=sessionStorage.getItem("token")
@@ -32,6 +33,19 @@ const EventCard = ({eventName,eventImage,eventTagline,index}) => {
         });
     }
   },[])
+
+  useEffect(()=>{
+    let a=JSON.parse(sessionStorage.getItem("isAlumni"))
+    if(a)
+    {
+        setIsAlumni(true)
+    }
+    else
+    {
+        setIsAlumni(false)
+    }
+
+},[])
 
   const addEvent=async ()=>{
     console.log("Adding")
@@ -106,7 +120,7 @@ const removeEvent=async ()=>{
       }
 
     }}>{loggedIn?isPaid?"Registered":eventRegistered.includes(index)?"Remove Event":"Add Event":"Please Login To Add"}</p> */}
-    <p  onClick={()=>{router.push("/events/"+index)}} className='text-white -translate-y-[60px] text-sm uppercase border border-white text-center py-1 tracking-wider font-[50]'>View Event</p>
+    {!isAlumni&&<p  onClick={()=>{router.push("/events/"+index)}} className='text-white -translate-y-[60px] text-sm uppercase border border-white text-center py-1 tracking-wider font-[50]'>View Event</p>}
 
   </div>
   )

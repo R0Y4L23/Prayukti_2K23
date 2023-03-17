@@ -73,8 +73,8 @@ const Index = () => {
           <p onClick={()=>{router.push("/event")}} className="text-center min-[1024px]:text-[30px] text-[25px] gravity tracking-[10px]  z-20 min-[768px]:-translate-y-1 -translate-y-1 hover:tracking-[15px] hover:text-[40px] duration-500 cursor-pointer text-white">Launch | Clutch | Futurize</p>
           <div className='flex flex-row justify-center items-center gap-5 mt-12 z-20 min-[768px]:-translate-y-1 -translate-y-4'>
           <a href='https://www.facebook.com/prayuktihith?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-blue-400 cursor-pointer"></i></a>
-          <a href='https://instagram.com/prayuktihit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-blue-400 cursor-pointer"></i></a>
-          <a href='https://www.facebook.com/rivierahithaldia?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-pink-400 cursor-pointer"></i></a>
+          <a href='https://instagram.com/prayuktihit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-blue-400 cursor-pointer mr-3"></i></a>
+          <a href='https://www.facebook.com/rivierahithaldia?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-pink-400 cursor- ml-3"></i></a>
           <a href='https://instagram.com/rivierahit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-pink-400 cursor-pointer"></i></a>
           </div>
       </div>

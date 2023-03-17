@@ -39,6 +39,15 @@ useEffect(()=>{
     }
 },[])
 
+useEffect(()=>{
+    let a=JSON.parse(sessionStorage.getItem("isAlumni"))
+    if(a)
+    {
+        toast.error("Only Available For Students")
+        router.replace("/")
+    }
+},[])
+
 
 
 const events=[
@@ -111,13 +120,6 @@ return (
     <div className='w-[90%] mx-auto min-h-screen z-20 -translate-y-1 min-[1080px]:flex flex-row hidden'>
         <div className='w-[40%] flex flex-col justify-center items-center min-h-screen gap-5'>
             <img src={'/assets/images/events/'+events[id-1][2]+'.jpg'} alt='event-page' className='mx-auto w-[80%] rounded-[15px]' />
-            {/* <p className='text-center text-white text-xl underline uppercase'>Co-Ordinators : </p>
-            <div>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-            </div> */}
         </div>
         <div className='w-[60%] flex flex-col justify-center items-center gap-10'>
             <p className='text-4xl text-center text-white underline glitch'>{events[id-1][0]}:</p>
@@ -149,13 +151,6 @@ return (
             </TabList>
             <TabPanel className={"flex flex-col justify-center items-center"}>
             <img src={'/assets/images/events/'+events[id-1][2]+'.jpg'} alt='event-page' className='mx-auto w-[300px] rounded-[15px] mt-10' />
-            {/* <p className='text-center text-white text-xl underline uppercase my-5'>Co-Ordinators : </p>
-            <div>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-                <p className='text-center text-white text-lg'>Abcdefgh Abcdefgh : 1234567890</p>
-            </div> */}
             </TabPanel>
             <TabPanel>
             <p className='text-center text-white min-[700px]:text-[20px] min-[470px]:text-[16px] text-[12px] mt-5 mx-5 font-mono'>{events[id-1][3]}</p>

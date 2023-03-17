@@ -175,7 +175,7 @@ const Profile = () => {
                 <img src='assets/images/qr.png' className='w-[550px] h-[550px]' alt='qr'/>
             </div>
 
-            {profileDetails&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 h-full'>
+            {(profileDetails&&profileComplete)&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 h-full'>
                
                 {profileDetails&&<>
                     <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
@@ -195,6 +195,12 @@ const Profile = () => {
                 {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
                 {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
             </div>}
+
+            {(profileDetails&&!profileComplete)&&<div className='w-[30%] box flex flex-col justify-center items-center px-5 gap-2 h-full'>
+                <p className='glitch text-xl text-white text-center'>Please Complete Your Profile To Continue</p>
+                </div>}
+
+
         </div>
 
         <Tabs className='mt-5 min-[800px]:hidden block'selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
@@ -245,7 +251,7 @@ const Profile = () => {
             </TabPanel>
             <TabPanel>
                 
-            {profileDetails&&<div className='w-[90%] box rounded-[15px] flex flex-col justify-center relative px-5 gap-1 h-[540px] mt-5 mx-auto'>
+            {(profileDetails&&profileComplete)&&<div className='w-[90%] box rounded-[15px] flex flex-col justify-center relative px-5 gap-1 h-[540px] mt-5 mx-auto'>
             <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
                 {profileDetails&&
                     profileDetails.events.map((item,index)=>{
@@ -262,6 +268,10 @@ const Profile = () => {
                 {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
                 {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
             </div>}
+
+            {(profileDetails&&!profileComplete)&&<div className='w-[90%] box mx-auto -translate-y-1 flex flex-col justify-center items-center px-5 gap-2 h-[540px]'>
+                <p className='glitch text-xl text-white text-center'>Please Complete Your Profile To Continue</p>
+                </div>}
             </TabPanel>
         </Tabs>
     </div>

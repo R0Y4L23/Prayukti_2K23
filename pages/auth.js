@@ -93,6 +93,7 @@ const Auth = () => {
                 sessionStorage.setItem("user",JSON.stringify(u.user))
                 sessionStorage.setItem("token",u.user.refreshToken)
                 sessionStorage.setItem("id",u.user.uid)
+                sessionStorage.setItem("isAlumni",JSON.stringify(false))
                 toast.success("Successfully Logged In")
                 router.replace("/")
             }).catch((e)=>{
@@ -109,6 +110,7 @@ const Auth = () => {
                 sessionStorage.setItem("user",JSON.stringify(u.user))
                 sessionStorage.setItem("token",u.user.refreshToken)
                 sessionStorage.setItem("id",u.user.uid)
+                sessionStorage.setItem("isAlumni",JSON.stringify(false))
 
                 await setDoc(doc(firestore,"Users",u.user.uid),{
                     email:value2,
@@ -262,6 +264,7 @@ const Auth = () => {
                 sessionStorage.setItem("user",JSON.stringify(u.user))
                 sessionStorage.setItem("token",u.user.refreshToken)
                 sessionStorage.setItem("id",u.user.uid)
+                sessionStorage.setItem("isAlumni",JSON.stringify(false))
 
                 await setDoc(doc(firestore,"Users",u.user.uid),{
                     email:value2,
@@ -312,6 +315,7 @@ const Auth = () => {
                 sessionStorage.setItem("user",JSON.stringify(u.user))
                 sessionStorage.setItem("token",u.user.refreshToken)
                 sessionStorage.setItem("id",u.user.uid)
+                sessionStorage.setItem("isAlumni",JSON.stringify(false))
                 toast.success("Successfully Logged In")
                 setLoading(false)
                 router.replace("/")
@@ -329,6 +333,7 @@ const Auth = () => {
     const googleSignIn=()=>{
         signInWithPopup(auth, provider)
   .then(async (result) => {
+    toast.success("Please Wait! You are being Logged In.")
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     const user = result.user;
@@ -336,6 +341,7 @@ const Auth = () => {
     sessionStorage.setItem("user",JSON.stringify(user))
     sessionStorage.setItem("token",user.refreshToken)
     sessionStorage.setItem("id",user.uid)
+    sessionStorage.setItem("isAlumni",JSON.stringify(false))
 
     const docRef = doc(firestore,"Users",user.uid);
     const docSnap = await getDoc(docRef);
@@ -355,11 +361,9 @@ const Auth = () => {
             events:[],
             payment:""
         })
-    
         toast.success("Successfully Registered")
         router.replace("/profile")
     }
-
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -488,6 +492,9 @@ const Auth = () => {
                 </div> 
                 <div className="col-span-2">
                     <p onClick={()=>{setTerminalUI(!terminalUI)}} className=" text-center text-cyan-500 font-mono cursor-pointer hover:text-cyan-300 duration-500">Show Terminal UI</p>
+                </div>  
+                <div className="col-span-2">
+                    <p onClick={()=>{router.replace("/alumniAuth")}} className=" text-center text-green-500 font-mono cursor-pointer hover:text-green-300 duration-500">Alumni Registration</p>
                 </div>  
                 </div>}
         </div>
