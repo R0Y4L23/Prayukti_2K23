@@ -15,10 +15,18 @@ import { useRouter } from 'next/router';
 
 import CyberpunkButton from '../components/cyberpunkButton';
 
+const InputField=({label,value,setValue,type})=>{
+    return(
+        <div className="flex flex-row justify-center items-center">
+            <input value={value} onChange={(e)=>{setValue(e.target.value)}} type={type} className="p-2.5 text-white focus:outline-none bg-slate-600 rounded-[15px] w-[90%]" placeholder={label}/>
+        </div>
+    )
+}
+
+
 const Profile = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
-
     const router=useRouter()
 
     const events=[
@@ -40,14 +48,22 @@ const Profile = () => {
         ["See-QL","","sql",""],
         ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",""],
         ["Online Games","Coming Soon!","games","Coming Soon!"],
-         ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year."]
+        ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year."]
     ]
 
 
     const [profileDetails,setProfileDetails]=useState(null)
     const [uid,setUid]=useState("")
 
+    const [profileComplete,setProfileComplete]=useState(false)
+
     const [file,setFile]=useState(null)
+
+    const [name,setName]=useState("")
+    const [college,setCollege]=useState("")
+    const [phone,setPhone]=useState(0)
+    const [roll,setRoll]=useState("")
+    const [year,setYear]=useState("")
 
     useEffect(()=>{
         let u=sessionStorage.getItem("id")
@@ -55,7 +71,20 @@ const Profile = () => {
         {
             setUid(u)
             onSnapshot(doc(firestore, "Users", u), (doc) => {
-            setProfileDetails(doc.data())          
+            setProfileDetails(doc.data())
+            setName(doc.data().name)
+            setCollege(doc.data().college_name)
+            setYear(doc.data().year)
+            setRoll(doc.data().roll)
+            setPhone(doc.data().contact)
+            if(!(doc.data().contact&&doc.data().college_name&&doc.data().year&&doc.data().roll&&doc.data().name))
+            {
+                setProfileComplete(false)
+            }
+            else
+            {
+                setProfileComplete(true)
+            }          
         });
         }
         else
@@ -79,6 +108,25 @@ const Profile = () => {
         });
     }
 
+   
+    const updateProfileData=async ()=>{
+
+        if(name&&college&&roll&&year&&phone)
+        {
+        await updateDoc(doc(firestore,"Users",uid),{
+            name:name,
+            college_name:college,
+            roll:roll,
+            year:year,
+            contact:phone,
+        })
+        toast.success("Profile Successfully Updated")
+    }
+    else
+    {
+        toast.error("Please Fill All The Details")
+    }
+    }
 
   return (
     <>
@@ -89,7 +137,7 @@ const Profile = () => {
         <div className='absolute top-0 bg-black h-screen w-full bg-opacity-60'>
         </div>
         <div className='w-full h-[500px] min-[800px]:flex flex-row hidden justify-evenly items-center z-20 translate-y-10 mt-12'>
-            {profileDetails&&
+            {(profileDetails&&profileComplete)&&
             <div  className='w-[30%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
                 <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
                 <div className='mb-10 mt-4' >
@@ -112,12 +160,22 @@ const Profile = () => {
                     </div>
                 </div>
             </div>}
+            {(profileDetails&&!profileComplete)&&
+            <div className='w-[30%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
+                <p className='text-white text-xl glitch text-center'>Please Complete Your Profile</p>
+                <InputField label={"Name"} value={name} setValue={setName}/>
+                <InputField label={"College Name"} value={college} setValue={setCollege}/>
+                <InputField label={"College Roll No."} value={roll} setValue={setRoll}/>
+                <InputField label={"College Year"} value={year} setValue={setYear}/>
+                <InputField label={"Contact"} type="number" value={phone} setValue={setPhone} />
+                <CyberpunkButton text={"Save Data"} onClick={updateProfileData}/>
+            </div>}
 
             <div className='w-[30%] h-full bg-white box flex flex-col justify-center items-center'>
                 <img src='assets/images/qr.png' className='w-2/3 h-[95%]' alt='qr'/>
             </div>
 
-            {profileDetails&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 xyz'>
+            {profileDetails&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 h-full'>
                
                 {profileDetails&&<>
                     <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
@@ -146,7 +204,7 @@ const Profile = () => {
                 <Tab><p className={tabIndex==2?'text-xl text-black':'text-xl text-white'}>Events</p></Tab>
             </TabList>
             <TabPanel>
-            {profileDetails&&
+            {(profileDetails&&profileComplete)&&
             <div  className='w-[90%] h-[540px] py-10 flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto mt-5'>
                 <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
                 <div className='mb-10 mt-4' >
@@ -169,6 +227,16 @@ const Profile = () => {
                     </div>
                 </div>
             </div>}
+            {(profileDetails&&!profileComplete)&&
+            <div className='w-[90%] h-[540px] flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto'>
+                <p className='text-white text-xl glitch text-center'>Please Complete Your Profile</p>
+                <InputField label={"Name"} value={name} setValue={setName}/>
+                <InputField label={"College Name"} value={college} setValue={setCollege}/>
+                <InputField label={"College Roll No."} value={roll} setValue={setRoll}/>
+                <InputField label={"College Year"} value={year} setValue={setYear}/>
+                <InputField label={"Contact"} type="number" value={phone} setValue={setPhone} />
+                <CyberpunkButton text={"Save Data"} onClick={updateProfileData}/>
+            </div>}
             </TabPanel>
             <TabPanel>
             <div className='w-[90%] bg-white box flex flex-col justify-center items-center h-[450px] mt-5 mx-auto z-20 translate-y-0'>
@@ -190,8 +258,7 @@ const Profile = () => {
                 <hr/>
                 {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
                 {!profileDetails.payment&&<p className='font-mono mb-5 text-white'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
-
-{!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
+                {!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
                 {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
                 {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
             </div>}

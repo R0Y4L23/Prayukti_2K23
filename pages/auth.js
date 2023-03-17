@@ -4,12 +4,14 @@ import { useState,useEffect } from "react"
 import React from 'react'
 import { useRouter } from "next/router"
 import { auth,firestore } from "../firebase/config"
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"
-import { doc, setDoc } from "firebase/firestore"; 
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from "firebase/auth"
+import { doc, setDoc,getDoc } from "firebase/firestore"; 
 
 import {toast} from "react-toastify"
 
 import Head from "next/head"
+
+const provider = new GoogleAuthProvider();
 
 
 const TerminalText=({value,admin})=>{
@@ -38,7 +40,7 @@ const Auth = () => {
     const router=useRouter()
 
     const [terminalUI,setTerminalUI]=useState(false)
-    const [showRegister,setShowRegister]=useState(true)
+    const [showRegister,setShowRegister]=useState(false)
 
     const [value1,setValue1]=useState("")
     const [value2,setValue2]=useState("")
@@ -324,6 +326,50 @@ const Auth = () => {
       }
 
 
+    const googleSignIn=()=>{
+        signInWithPopup(auth, provider)
+  .then(async (result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+
+    sessionStorage.setItem("user",JSON.stringify(user))
+    sessionStorage.setItem("token",user.refreshToken)
+    sessionStorage.setItem("id",user.uid)
+
+    const docRef = doc(firestore,"Users",user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        toast.success("Successfully Logged In")
+        router.replace("/profile")
+        
+    } else {
+        await setDoc(docRef,{
+            email:user.email,
+            name:user.displayName,
+            college_name:"",
+            roll:"",
+            year:"",
+            contact:user.phoneNumber,
+            events:[],
+            payment:""
+        })
+    
+        toast.success("Successfully Registered")
+        router.replace("/profile")
+    }
+
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    toast.error(errorMessage)
+  });
+ }
+
+
     return (
         <>
         <Head><title>Auth</title></Head>
@@ -408,7 +454,7 @@ const Auth = () => {
                     </div>
                 </div>
             </div>}
-            {!terminalUI&&<div className={`authSize bg-black min-[930px]:w-2/3 w-[95%] h-[600px] bg-opacity-50 z-10 relative ${showRegister?"grid":"flex flex-col justify-center items-center gap-5"} grid-cols-2`}>
+            {!terminalUI&&<div className={`authSize bg-black min-[930px]:w-2/3 w-[95%] h-[600px] bg-opacity-50 z-10 ${showRegister?"grid":"flex flex-col justify-center items-center gap-5"} grid-cols-2`}>
                 <div className="col-span-2">
                     <p className=" text-center text-white text-4xl font-mono">{showRegister?"Register":"Login"}</p>
                 </div>   
@@ -427,7 +473,16 @@ const Auth = () => {
                             submit()
                         }
                     }}>{loading?"Loading...":"Submit"}</p>
-                </div>  
+                </div> 
+                {!showRegister&&<><p className="text-center text-white text-xl">OR</p> 
+                <div onClick={googleSignIn} className="w-[300px] flex flex-row rounded-xl min-[650px]:scale-100 min-[424px]:scale-[65%] scale-[55%] cursor-pointer">
+                    <div className="w-[20%] bg-white flex flex-row justify-center items-center">
+                        <img src="assets/icons/google.png" alt="google" className="w-[50px] m-2"/>
+                    </div>
+                    <div className="w-[80%] bg-blue-400 flex flex-row items-center justify-center">
+                        <p className="text-white text-center text-xl">Sign In With Google</p>
+                    </div>
+                </div></>}
                 <div className="col-span-2">
                     <p onClick={()=>{setShowRegister(!showRegister)}} className=" text-center text-white font-mono">{showRegister?"Already Have An Account?":"No Account?"} <span className=" text-violet-600 hover:text-violet-300 duration-500 cursor-pointer">{showRegister?"Login":"Register"}</span></p>
                 </div> 
