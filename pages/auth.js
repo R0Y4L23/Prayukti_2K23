@@ -24,12 +24,12 @@ const TerminalText=({value,admin})=>{
     )
 }
 
-const InputField=({label,value,setValue,type})=>{
+const InputField=({label,value,setValue,type,placeholder})=>{
     return(
         <div className="flex flex-row justify-center items-center">
             <div>
             <label  className="block mb-2 font-mono font-medium text-white">{label}</label>
-            <input value={value} onChange={(e)=>{setValue(e.target.value)}} type={type} className="p-2.5 text-white focus:outline-none bg-slate-600 rounded-[15px] min-[650px]:w-[300px] min-[425px]:w-[200px] w-[150px]" placeholder="Type Here..."/>
+            <input step={"0.01"} value={value} onChange={(e)=>{setValue(e.target.value)}} type={type} className="p-2.5 text-white focus:outline-none bg-slate-600 rounded-[15px] min-[650px]:w-[300px] min-[425px]:w-[200px] w-[150px]" placeholder={placeholder}/>
             </div>
         </div>
     )
@@ -458,14 +458,14 @@ const Auth = () => {
                 <div className="col-span-2">
                     <p className=" text-center text-white text-4xl font-mono">{showRegister?"Register":"Login"}</p>
                 </div>   
-                <InputField label={"Email"} value={value2} setValue={setValue2}/>
-                <InputField label={"Password"} value={value3} setValue={setValue3} type={"password"}/>
-                {showRegister&&<><InputField label={"Confirm Password"} value={value4} setValue={setValue4} type={"password"}/>
-                <InputField label={"Name"} value={value5} setValue={setValue5}/>
-                <InputField label={"College"} value={value6} setValue={setValue6}/>
-                <InputField label={"College Roll No."} value={value7} setValue={setValue7}/>
-                <InputField label={"Year"} value={value8} setValue={setValue8}/>
-                <InputField label={"Contact"} value={value9} setValue={setValue9} type={"number"}/></>}
+                <InputField label={"Email"} placeholder={"Eg: abc@xyz.com"} value={value2} setValue={setValue2}/>
+                <InputField label={"Password"} placeholder={"Minimum 8 Characters"} value={value3} setValue={setValue3} type={"password"}/>
+                {showRegister&&<><InputField label={"Confirm Password"} placeholder={"Confirm Password"} value={value4} setValue={setValue4} type={"password"}/>
+                <InputField label={"Name"} placeholder={"Full Name"} value={value5} setValue={setValue5}/>
+                <InputField label={"College"} placeholder={"Eg. Haldia Institute Of Technology"} value={value6} setValue={setValue6}/>
+                <InputField label={"College Roll No."} placeholder={"Eg. 20/CSE/123"} value={value7} setValue={setValue7}/>
+                <InputField label={"Year"} placeholder={"Eg. 1st Year"} value={value8} setValue={setValue8}/>
+                <InputField label={"Contact"} placeholder={"Eg. 9008934834"} value={value9} setValue={setValue9} type={"number"}/></>}
                 <div className="col-span-2">
                     <p className={`text-center text-white text-2xl font-mono bg-blue-300 bg-opacity-50 rounded-2xl border-white border ${showRegister?"w-1/2":"w-[200px]"} mx-auto mt-5 cursor-pointer`} onClick={()=>{
                         if(!loading)

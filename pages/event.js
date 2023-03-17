@@ -45,7 +45,7 @@ const onTouchEnd = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 4200)
+        }, 3200)
     }, [])
 
     useEffect(()=>{
@@ -60,29 +60,31 @@ const onTouchEnd = () => {
 
     const events=[
         [[
-            "Requizzit","Level up your brains, and thrive on to win.","requizzit",18],
-        ["Robowar","Combat with your bots, and let their best win","robowar",1],
-        ["Lakshya","Reach your destination at your risk","lakshya",2]],
+        "Requizzit","Level up your brains, and thrive on to win.","requizzit",1],
+        ["Robowar","Combat with your bots, and let their best win","robowar",2],
+        ["Lakshya","Reach your destination at your risk","lakshya",3]],
 
-        [["Udaan","Be the pilot you always dreamt","udaan",3],
-        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan",4],
-        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts",5]],
+        [["Udaan","Be the pilot you always dreamt","udaan",4],
+        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan",5],
+        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts",6]],
 
-        [["Code-Blooded","Code is poetry, let your Imagination run wild.","code",6],
-        ["Overnite","Let the code leave your competitiors in the byte dust","overnite",7],
-        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier",8]],
+        [["Code-Blooded","Code is poetry, let your Imagination run wild.","code",7],
+        ["Overnite","Let the code leave your competitiors in the byte dust","overnite",8],
+        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier",9]],
 
-        [["LA-Photography","Let the lens do the talking of a story unknown","laphotography",9],
-        ["Pradarshan","Let the creativity build around technology","pradarshan",10],
-        ["Crescent","Whose bridge withstands the London Bridge?","crescent",11]],
+        [["LA-Photography","Let the lens do the talking of a story unknown","laphotography",10],
+        ["Pradarshan","Let the creativity build around technology","pradarshan",11],
+        ["Crescent","Whose bridge withstands the London Bridge?","crescent",12]],
 
-        [["Naturgenix","Create from our natural foundations.","naturgenix",12],
-        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope",13],
-        ["HiTaTHON","","hitathon",14]],
+        [["Naturgenix","Create from our natural foundations.","naturgenix",13],
+        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope",14],
+        ["HiTaTHON","","hitathon",15]],
 
-        [["See-QL","","sql",15],
-        ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",16],
-        ["Online Games","Coming Soon!","games",17]],
+        [["See-QL","","sql",16],
+        ["Fun Games","To Be Revealed Soon!","fungames",17],
+        ["Online Games","To Be Revealed Soon!","games",18]],
+
+        [["IoT Tech Expo","To Be Revealed Soon!","iot",19]]
     ]
 
     const events2=[
@@ -108,11 +110,11 @@ const onTouchEnd = () => {
         ["HiTaTHON","","hitathon"],
 
         ["See-QL","","sql"],
-        ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames"],
-        ["Online Games","Coming Soon!","games"],
-    ]
+        ["Fun Games","Coming Soon","fungames"],
+        ["Online Games","To Be Revealed Soon!","games"],
 
-    console.log(events[0][0])
+        ["IoT Tech Expo","To Be Revealed Soon!","iot"]
+    ]
 
     if (loading) {
         return <Loading2 />
@@ -144,7 +146,7 @@ const onTouchEnd = () => {
                         {loggedIn&&<p className="text-white border-white border px-4 bg-blue-300 bg-opacity-30 py-1 min-[550px]:text-[20px] text-[12px] uppercase font-[100] min-[550px]:tracking-[8px] tracking-[6px] cursor-pointer min-[650px]:hover:tracking-[15px] min-[650px]:hover:text-[25px] duration-500 gravity" onClick={() => { 
 
                            router.push("/profile")
-                            }}>Cart</p>}
+                            }}>Profile</p>}
                         <p className="text-white min-[550px]:text-[20px] text-[12px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[15px] min-[650px]:hover:text-[20px] duration-500 gravity" onClick={() => { 
                             if(loggedIn)
                             {
@@ -164,22 +166,22 @@ const onTouchEnd = () => {
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(current!=0)setCurrent(current-1)}} />
                         </div>
                         <div className="min-[1050px]:w-[70%] min-[778px]:w-[60%] w-[50%] grid min-[1150px]:grid-cols-3 min-[900px]:grid-cols-2 grid-cols-1 pt-5 min-[1250px]:pl-10 pl-5">
-                            <div>
+                            {events[current].length>=1&&<div>
                             <EventCard eventName={events[current][0][0]} eventTagline={events[current][0][1]} eventImage={events[current][0][2]} index={events[current][0][3]} />
-                            </div>
-                            <div className='min-[900px]:block hidden'>
+                            </div>}
+                            {events[current].length>=2&&<div className='min-[900px]:block hidden'>
                             <EventCard eventName={events[current][1][0]} eventTagline={events[current][1][1]} eventImage={events[current][1][2]} index={events[current][1][3]}/>
-                            </div>
-                            <div className='min-[1150px]:block hidden'>
+                            </div>}
+                            {events[current].length>=3&&<div className='min-[1150px]:block hidden'>
                             <EventCard eventName={events[current][2][0]} eventTagline={events[current][2][1]} eventImage={events[current][2][2]} index={events[current][2][3]}/>
-                            </div> 
+                            </div>}
                         </div>
                         <div className="min-[1050px]:w-[15%] min-[778px]:w-[20%] w-[25%] flex flex-col justify-center items-center">
-                            <CyberpunkButton text={"Next_"} onClick={()=>{if(current<5)setCurrent(current+1)}}/>
+                            <CyberpunkButton text={"Next_"} onClick={()=>{if(current<events.length-1)setCurrent(current+1)}}/>
                         </div>
                     </div>
                     <div className=' min-[650px]:flex hidden flex-row justify-center items-center -mt-14 gap-4'>
-                       {Array(6).fill(0).map((item,index)=>{
+                       {Array(events.length).fill(0).map((item,index)=>{
                         if (index==current)
                         {
                             return(<div key={index} className=" w-[16px] h-[16px] rounded-[8px] bg-blue-600 cursor-pointer"/>)
@@ -193,11 +195,11 @@ const onTouchEnd = () => {
                        })}
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]' onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile==0?18:currentMobile}/>
+                    <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile+1}/>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4 abc'>
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(currentMobile!=0)setCurrentMobile(currentMobile-1)}}/>
-                        <CyberpunkButton text={"Next_"}  onClick={()=>{if(currentMobile<17)setCurrentMobile(currentMobile+1)}}/>
+                        <CyberpunkButton text={"Next_"}  onClick={()=>{if(currentMobile<events2.length-1)setCurrentMobile(currentMobile+1)}}/>
                     </div>
                 </div>
             </div>

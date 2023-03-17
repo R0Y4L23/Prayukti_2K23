@@ -69,7 +69,7 @@ const removeEvent=async ()=>{
     <div className="card-bg"> 
       <div >
         <div>
-          <img src={"assets/images/events/"+eventImage+".jpg"} alt='event' className='h-[220px]' onClick={()=>{router.push("/events/"+index)}}/>
+          <img src={"assets/images/events/"+eventImage+".jpg"} alt='event' className='h-[220px] w-full' onClick={()=>{router.push("/events/"+index)}}/>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@ const removeEvent=async ()=>{
     <strong id="text-ext">{eventName}</strong>
     <strong id="text-border">{eventName}</strong>
     <p className='text-white -translate-y-16 text-sm gravity tracking-wider font-[50]'>{eventTagline}</p>
-    <p className='text-white -translate-y-[60px] text-sm uppercase border border-white text-center py-1 tracking-wider font-[50]' onClick={()=>{
+    {/* <p className='text-white -translate-y-[60px] text-sm uppercase border border-white text-center py-1 tracking-wider font-[50]' onClick={()=>{
 
       if(!loggedIn)
       {
@@ -105,7 +105,9 @@ const removeEvent=async ()=>{
         }
       }
 
-    }}>{loggedIn?isPaid?"Registered":eventRegistered.includes(index)?"Remove Event":"Add Event":"Please Login To Add"}</p>
+    }}>{loggedIn?isPaid?"Registered":eventRegistered.includes(index)?"Remove Event":"Add Event":"Please Login To Add"}</p> */}
+    <p  onClick={()=>{router.push("/events/"+index)}} className='text-white -translate-y-[60px] text-sm uppercase border border-white text-center py-1 tracking-wider font-[50]'>View Event</p>
+
   </div>
   )
 }

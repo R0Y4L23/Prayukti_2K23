@@ -6,6 +6,14 @@
     overflow: hidden;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
 @font-face {
     font-family: 'glitch';
     src: url(../fonts/glitch_font.ttf);

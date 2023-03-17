@@ -47,8 +47,8 @@ const Profile = () => {
         ["HiTaTHON","","hitathon",""],
         ["See-QL","","sql",""],
         ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",""],
-        ["Online Games","Coming Soon!","games","Coming Soon!"],
-        ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year."]
+        ["Online Games","To Be Revealed Soon!","games","To Be Revealed Soon!"],
+        ["IoT Tech Expo","To Be Revealed Soon!","iot","To Be Revealed Soon!"]
     ]
 
 
@@ -172,7 +172,7 @@ const Profile = () => {
             </div>}
 
             <div className='w-[30%] h-full bg-white box flex flex-col justify-center items-center'>
-                <img src='assets/images/qr.png' className='w-2/3 h-[95%]' alt='qr'/>
+                <img src='assets/images/qr.png' className='w-[550px] h-[550px]' alt='qr'/>
             </div>
 
             {profileDetails&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 h-full'>
@@ -240,7 +240,7 @@ const Profile = () => {
             </TabPanel>
             <TabPanel>
             <div className='w-[90%] bg-white box flex flex-col justify-center items-center h-[450px] mt-5 mx-auto z-20 translate-y-0'>
-                <img src='assets/images/qr.png' className='w-[300px] h-[95%]' alt='qr'/>
+                <img src='assets/images/qr.png' className='w-[550px] h-[550px]' alt='qr'/>
             </div>
             </TabPanel>
             <TabPanel>
