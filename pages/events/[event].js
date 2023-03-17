@@ -136,6 +136,7 @@ return (
                     addEvent()
                 }
             }}/>}<CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
+            {!loggedIn&&<p className='text-center text-white cursor-pointer uppercase font-mono' onClick={()=>{router.push("/auth")}}>Please Login To Add Events</p>}
         </div>
     </div>
     <div className='min-[1080px]:hidden block z-20 -translate-y-1'>
@@ -174,7 +175,7 @@ return (
                         addEvent()
                     }
                  }}/>}<CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}
-                 {!loggedIn&&<p className='text-center text-white'>Please Login To Add Events</p>}
+                 {!loggedIn&&<p className='text-center text-white' onClick={()=>{router.push("/auth")}}>Please Login To Add Events</p>}
                  </div>
             </TabPanel>
             <TabPanel>

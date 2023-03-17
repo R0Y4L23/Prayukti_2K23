@@ -13,6 +13,35 @@ const Events = () => {
     const [currentMobile,setCurrentMobile]=useState(0)
     const [loggedIn,setLoggedIn]=useState(false)
 
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
+
+// the required distance between touchStart and touchEnd to be detected as a swipe
+const minSwipeDistance = 50 
+
+const onTouchStart = (e) => {
+  setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+  setTouchStart(e.targetTouches[0].clientX)
+}
+
+const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+const onTouchEnd = () => {
+  if (!touchStart || !touchEnd) return
+  const distance = touchStart - touchEnd
+  const isLeftSwipe = distance > minSwipeDistance
+  const isRightSwipe = distance < -minSwipeDistance
+  if (isLeftSwipe )
+  {
+    if(currentMobile<17)setCurrentMobile(currentMobile+1)
+  }
+  if(isRightSwipe)
+  {
+    if(currentMobile!=0)setCurrentMobile(currentMobile-1)
+  }
+ 
+}
+
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
@@ -111,7 +140,12 @@ const Events = () => {
                 <div className="absolute top-0 left-0 h-[100vh] w-full z-20">
                     <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-4 -translate-y-2">
                         <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[150px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
-                        <p className="text-white min-[550px]:text-[25px] text-[15px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[20px] min-[650px]:hover:text-[40px] duration-500 gravity" onClick={() => { 
+                        <div className='flex flex-row justify-center items-center min-[550px}:gap-10 gap-5'>
+                        {loggedIn&&<p className="text-white border-white border px-4 bg-blue-300 bg-opacity-30 py-1 min-[550px]:text-[20px] text-[12px] uppercase font-[100] min-[550px]:tracking-[8px] tracking-[6px] cursor-pointer min-[650px]:hover:tracking-[15px] min-[650px]:hover:text-[25px] duration-500 gravity" onClick={() => { 
+
+                           router.push("/profile")
+                            }}>Cart</p>}
+                        <p className="text-white min-[550px]:text-[20px] text-[12px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[15px] min-[650px]:hover:text-[20px] duration-500 gravity" onClick={() => { 
                             if(loggedIn)
                             {
                                 sessionStorage.clear()
@@ -122,8 +156,9 @@ const Events = () => {
                             router.push("/auth") 
                             }
                             }}>{loggedIn?"Logout":"Login"}</p>
+                        </div>
                     </div>
-                    <p className="text-center min-[1050px]:-mt-4 min-[778px]:-mt-20 min-[550px]:-mt-12 -mt-8 min-[550px]:text-[20px] text-[12px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[10px] min-[650px]:hover:text-[25px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To The Era Of Virtual Veda</p>
+                    <p className="text-center min-[1050px]:-mt-4 min-[778px]:-mt-8 min-[550px]:-mt-12 -mt-8 min-[550px]:text-[20px] text-[12px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[10px] min-[650px]:hover:text-[25px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To The Era Of Virtual Veda</p>
                     <div className="w-full min-[650px]:flex flex-row mt-10 h-[500px] hidden">
                         <div className="min-[1050px]:w-[15%] min-[778px]:w-[20%] w-[25%] flex flex-col justify-center items-center">
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(current!=0)setCurrent(current-1)}} />
@@ -143,7 +178,21 @@ const Events = () => {
                             <CyberpunkButton text={"Next_"} onClick={()=>{if(current<5)setCurrent(current+1)}}/>
                         </div>
                     </div>
-                    <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]'>
+                    <div className=' min-[650px]:flex hidden flex-row justify-center items-center -mt-14 gap-4'>
+                       {Array(6).fill(0).map((item,index)=>{
+                        if (index==current)
+                        {
+                            return(<div key={index} className=" w-[16px] h-[16px] rounded-[8px] bg-blue-600 cursor-pointer"/>)
+                        }
+                        else
+                        {
+                        return(
+                            <div key={index} className=" w-[16px] h-[16px] rounded-[8px] bg-white cursor-pointer" onClick={()=>{setCurrent(index)}}/>
+                        )
+                        }
+                       })}
+                    </div>
+                    <div className='min-[650px]:hidden flex flex-row justify-center items-center h-[420px]' onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                     <EventCard eventName={events2[currentMobile][0]} eventTagline={events2[currentMobile][1]} eventImage={events2[currentMobile][2]} index={currentMobile==0?18:currentMobile}/>
                     </div>
                     <div className='min-[650px]:hidden flex flex-row justify-center items-center min-[500px]:gap-10 gap-4 abc'>

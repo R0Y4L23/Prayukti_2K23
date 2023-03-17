@@ -421,18 +421,19 @@ const Auth = () => {
                 <InputField label={"Year"} value={value8} setValue={setValue8}/>
                 <InputField label={"Contact"} value={value9} setValue={setValue9} type={"number"}/></>}
                 <div className="col-span-2">
-                    <p className={`text-center text-white text-2xl font-mono border-white border ${showRegister?"w-1/2":"w-[200px]"} mx-auto mt-5 cursor-pointer`} onClick={submit}>{loading?"Loading...":"Submit"}</p>
+                    <p className={`text-center text-white text-2xl font-mono bg-blue-300 bg-opacity-50 rounded-2xl border-white border ${showRegister?"w-1/2":"w-[200px]"} mx-auto mt-5 cursor-pointer`} onClick={()=>{
+                        if(!loading)
+                        {
+                            submit()
+                        }
+                    }}>{loading?"Loading...":"Submit"}</p>
                 </div>  
                 <div className="col-span-2">
-                    <p onClick={()=>{setShowRegister(!showRegister)}} className=" text-center text-white font-mono">{showRegister?"Already Have An Account?":"No Account?"} <span className=" text-violet-600 cursor-pointer">{showRegister?"Login":"Register"}</span></p>
+                    <p onClick={()=>{setShowRegister(!showRegister)}} className=" text-center text-white font-mono">{showRegister?"Already Have An Account?":"No Account?"} <span className=" text-violet-600 hover:text-violet-300 duration-500 cursor-pointer">{showRegister?"Login":"Register"}</span></p>
                 </div> 
                 <div className="col-span-2">
-                    <p onClick={()=>{setTerminalUI(!terminalUI)}} className=" text-center text-cyan-500 font-mono">Show Terminal UI</p>
+                    <p onClick={()=>{setTerminalUI(!terminalUI)}} className=" text-center text-cyan-500 font-mono cursor-pointer hover:text-cyan-300 duration-500">Show Terminal UI</p>
                 </div>  
-
-
-
-
                 </div>}
         </div>
         </>

@@ -13,6 +13,8 @@ import { toast } from 'react-toastify';
 
 import { useRouter } from 'next/router';
 
+import CyberpunkButton from '../components/cyberpunkButton';
+
 const Profile = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
@@ -88,35 +90,52 @@ const Profile = () => {
         </div>
         <div className='w-full h-[500px] min-[800px]:flex flex-row hidden justify-evenly items-center z-20 translate-y-10 mt-12'>
             {profileDetails&&
-            <div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}}  className='w-[30%] h-full bg-white rounded-[15px] flex flex-col justify-center relative px-5 gap-5'>
-                <p className='text-center text-2xl underline font-mono absolute top-5'>Profile Details</p>
-                <p className='text-lg  font-mono'>NAME : {profileDetails.name}</p>
-                <p className='text-lg  font-mono break-words'>EMAIL : {profileDetails.email}</p>
-                <p className='text-lg  font-mono'>CONTACT : {profileDetails.contact}</p>
-                <p className='text-lg  font-mono'>COLLEGE : {profileDetails.college_name}</p>
-                <p className='text-lg  font-mono'>ROLL NO. : {profileDetails.roll}</p>
-                <p className='text-lg  font-mono'>YEAR : {profileDetails.year}</p>
+            <div  className='w-[30%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
+                <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
+                <div className='mb-10 mt-4' >
+                    <p className='text-3xl font-semibold text-white text-center glitch'>{profileDetails.name}</p>
+                    <p className='uppercase tracking-[10px] text-white text-center'>{profileDetails.college_name}</p>
+                    <p className=' text-white text-center gravity mt-3'>-{profileDetails.email}</p>
+                </div>
+                <div className='flex flex-row justify-center items-center gap-14'>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img alt='icon' src='assets/icons/college.png' className='w-[60px]'/>
+                        <p className='text-center text-white mt-2 gravity'>{profileDetails.roll}</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img alt='icon' src='assets/icons/year.png' className='w-[60px]'/>
+                        <p className='text-center text-white mt-2 gravity'>{profileDetails.year}</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img alt='icon' src='assets/icons/phone.png' className='w-[60px]'/>
+                        <p className='text-center text-white mt-2 gravity'>{profileDetails.contact}</p>
+                    </div>
+                </div>
             </div>}
-            <div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}}  className='w-[30%] h-full bg-white rounded-[15px] flex flex-col justify-center items-center'>
-                <img src='assets/images/qr.png' className='w-[300px] h-[300px]' alt='qr'/>
+
+            <div className='w-[30%] h-full bg-white box flex flex-col justify-center items-center'>
+                <img src='assets/images/qr.png' className='w-2/3 h-[95%]' alt='qr'/>
             </div>
-            {profileDetails&&<div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}} className='w-[30%] h-full bg-white rounded-[15px] flex flex-col justify-center relative px-5 gap-1'>
-                <p className='text-center text-2xl underline font-mono absolute top-5'>Events Added</p>
-                {profileDetails&&
-                    profileDetails.events.map((item,index)=>{
+
+            {profileDetails&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 xyz'>
+               
+                {profileDetails&&<>
+                    <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
+                    {profileDetails.events.map((item,index)=>{
                         return(
-                            <p key={index} className="text-lg font-mono">{events[item][0]} - ₹100/-</p>
+                            <p key={index} className="text-lg font-mono text-white">{events[item][0]} - ₹100/-</p>
                         )
-                    })
+                    })}
+                    </>
                 }
-                <p className="text-lg font-mono">Registration - ₹600/-</p>
+                <p className="text-lg font-mono text-white">Registration - ₹600/-</p>
                 <hr/>
-                {profileDetails&&<p className="text-xl font-mono">Total - ₹{profileDetails.events.length*100+600}/-</p>}
-                {!profileDetails.payment&&<p className='font-mono mb-5'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
+                {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
+                {!profileDetails.payment&&<p className='font-mono mb-5 text-white'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
 
 {!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
-                {(file&&!profileDetails.payment)&&<p className='font-mono text-lg border-4 border-black cursor-pointer px-3 py-1 text-center' onClick={register}>Register</p>}
-                {profileDetails.payment&&<p className='font-mono text-lg border-4 border-black cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
+                {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
+                {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
             </div>}
         </div>
 
@@ -128,40 +147,53 @@ const Profile = () => {
             </TabList>
             <TabPanel>
             {profileDetails&&
-            <div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}} className='w-[90%] h-[600px] bg-white rounded-[15px] flex flex-col justify-center relative px-5 gap-5 mt-5 mx-auto'>
-                <p className='text-center text-2xl underline font-mono absolute top-5'>Profile Details</p>
-                <p className='text-lg  font-mono'>NAME : {profileDetails.name}</p>
-                <p className='text-lg  font-mono break-words'>EMAIL : {profileDetails.email}</p>
-                <p className='text-lg  font-mono'>CONTACT : {profileDetails.contact}</p>
-                <p className='text-lg  font-mono'>COLLEGE : {profileDetails.college_name}</p>
-                <p className='text-lg  font-mono'>ROLL NO. : {profileDetails.roll}</p>
-                <p className='text-lg  font-mono'>YEAR : {profileDetails.year}</p>
+            <div  className='w-[90%] h-[540px] py-10 flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto mt-5'>
+                <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
+                <div className='mb-10 mt-4' >
+                    <p className='text-3xl font-semibold text-white text-center glitch'>{profileDetails.name}</p>
+                    <p className='uppercase tracking-[10px] text-white text-center'>{profileDetails.college_name}</p>
+                    <p className=' text-white text-center gravity mt-3'>-{profileDetails.email}</p>
+                </div>
+                <div className='flex flex-row justify-center items-center gap-14'>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img alt='icon' src='assets/icons/college.png' className='w-[60px]'/>
+                        <p className='text-center text-white mt-2 gravity'>{profileDetails.roll}</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img alt='icon' src='assets/icons/year.png' className='w-[60px]'/>
+                        <p className='text-center text-white mt-2 gravity'>{profileDetails.year}</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img alt='icon' src='assets/icons/phone.png' className='w-[60px]'/>
+                        <p className='text-center text-white mt-2 gravity'>{profileDetails.contact}</p>
+                    </div>
+                </div>
             </div>}
             </TabPanel>
             <TabPanel>
-            <div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}} className='w-[90%] bg-white rounded-[15px] flex flex-col justify-center items-center h-[600px] mt-5 mx-auto z-20 translate-y-1'>
-                <img src='assets/images/qr.png' className='w-[300px] h-[300px]' alt='qr'/>
+            <div className='w-[90%] bg-white box flex flex-col justify-center items-center h-[450px] mt-5 mx-auto z-20 translate-y-0'>
+                <img src='assets/images/qr.png' className='w-[300px] h-[95%]' alt='qr'/>
             </div>
             </TabPanel>
             <TabPanel>
                 
-            {profileDetails&&<div style={{background:"linear-gradient(67.6deg, rgb(225, 242, 254) -2.8%, rgb(193, 224, 250) 44.6%, rgb(19, 116, 197) 102.4%)"}} className='w-[90%] bg-white rounded-[15px] flex flex-col justify-center relative px-5 gap-1 h-[600px] mt-5 mx-auto'>
-                <p className='text-center text-2xl underline font-mono absolute top-5'>Events Added</p>
+            {profileDetails&&<div className='w-[90%] box rounded-[15px] flex flex-col justify-center relative px-5 gap-1 h-[540px] mt-5 mx-auto'>
+            <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
                 {profileDetails&&
                     profileDetails.events.map((item,index)=>{
                         return(
-                            <p key={index} className="text-lg font-mono">{events[item][0]} - ₹100/-</p>
+                            <p key={index} className="text-lg font-mono text-white">{events[item][0]} - ₹100/-</p>
                         )
                     })
                 }
-                <p className="text-lg font-mono">Registration - ₹600/-</p>
+                <p className="text-lg font-mono text-white">Registration - ₹600/-</p>
                 <hr/>
-                {profileDetails&&<p className="text-xl font-mono">Total - ₹{profileDetails.events.length*100+600}/-</p>}
-                {!profileDetails.payment&&<p className='font-mono mb-5'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
+                {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
+                {!profileDetails.payment&&<p className='font-mono mb-5 text-white'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
 
-                {!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
-                {(file&&!profileDetails.payment)&&<p className='font-mono text-lg border-4 border-black cursor-pointer px-3 py-1 text-center' onClick={register}>Register</p>}
-                {profileDetails.payment&&<p className='font-mono text-lg border-4 border-black cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
+{!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
+                {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
+                {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
             </div>}
             </TabPanel>
         </Tabs>
