@@ -73,7 +73,7 @@ const AlumniAuth = () => {
             </div>
            <div className={`authSize bg-black min-[930px]:w-2/3 w-[95%] h-[600px] bg-opacity-50 z-10 flex flex-col justify-center items-center gap-5 grid-cols-2`}>
                 <div className="col-span-2">
-                    <p className=" text-center text-white text-4xl font-mono">Alumni Login</p>
+                    <p className=" text-center text-white text-4xl font-mono glitch">Alumni Login</p>
                 </div>   
                 <div onClick={googleSignIn} className="w-[300px] flex flex-row rounded-xl min-[650px]:scale-100 min-[424px]:scale-[65%] scale-[55%] cursor-pointer">
                     <div className="w-[20%] bg-white flex flex-row justify-center items-center">

@@ -460,7 +460,7 @@ const Auth = () => {
             </div>}
             {!terminalUI&&<div className={`authSize bg-black min-[930px]:w-2/3 w-[95%] h-[600px] bg-opacity-50 z-10 ${showRegister?"grid":"flex flex-col justify-center items-center gap-5"} grid-cols-2`}>
                 <div className="col-span-2">
-                    <p className=" text-center text-white text-4xl font-mono">{showRegister?"Register":"Login"}</p>
+                    <p className=" text-center text-white text-4xl font-mono glitch">{showRegister?"Register":"Login"}</p>
                 </div>   
                 <InputField label={"Email"} placeholder={"Eg: abc@xyz.com"} value={value2} setValue={setValue2}/>
                 <InputField label={"Password"} placeholder={"Minimum 8 Characters"} value={value3} setValue={setValue3} type={"password"}/>

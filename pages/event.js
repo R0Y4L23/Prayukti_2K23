@@ -84,7 +84,7 @@ const onTouchEnd = () => {
         ["Fun Games","To Be Revealed Soon!","fungames",17],
         ["Online Games","To Be Revealed Soon!","games",18]],
 
-        [["IoT Tech Expo","To Be Revealed Soon!","iot",19]]
+        [["IoT Tech Expo","Expose connections that build the future","iot",19]]
     ]
 
     const events2=[
@@ -113,7 +113,7 @@ const onTouchEnd = () => {
         ["Fun Games","Coming Soon","fungames"],
         ["Online Games","To Be Revealed Soon!","games"],
 
-        ["IoT Tech Expo","To Be Revealed Soon!","iot"]
+        ["IoT Tech Expo","Expose connections that build the future","iot"]
     ]
 
     if (loading) {

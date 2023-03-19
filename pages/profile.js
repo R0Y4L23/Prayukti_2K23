@@ -48,7 +48,7 @@ const Profile = () => {
         ["See-QL","","sql",""],
         ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames",""],
         ["Online Games","To Be Revealed Soon!","games","To Be Revealed Soon!"],
-        ["IoT Tech Expo","To Be Revealed Soon!","iot","To Be Revealed Soon!"]
+        ["IoT Tech Expo","Expose connections that build the future","iot","To Be Revealed Soon!"]
     ]
 
 
@@ -186,6 +186,8 @@ const Profile = () => {
                     })}
                     </>
                 }
+                 {(profileDetails&&profileDetails.events.length==0)&&<p className='text-white font-mono'>You Have Not Added Any Events</p>}
+                 {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
                 <p className="text-lg font-mono text-white">Registration - ₹600/-</p>
                 <hr/>
                 {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
@@ -211,7 +213,7 @@ const Profile = () => {
             </TabList>
             <TabPanel>
             {(profileDetails&&profileComplete)&&
-            <div  className='w-[90%] h-[540px] py-10 flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto mt-5'>
+            <div  className='w-[90%] h-[600px] py-10 flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto mt-5 profileCard'>
                 <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
                 <div className='mb-10 mt-4' >
                     <p className='text-3xl font-semibold text-white text-center glitch'>{profileDetails.name}</p>
@@ -234,7 +236,7 @@ const Profile = () => {
                 </div>
             </div>}
             {(profileDetails&&!profileComplete)&&
-            <div className='w-[90%] h-[540px] flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto'>
+            <div className='w-[90%] h-[600px] flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto profileCard'>
                 <p className='text-white text-xl glitch text-center'>Please Complete Your Profile</p>
                 <InputField label={"Name"} value={name} setValue={setName}/>
                 <InputField label={"College Name"} value={college} setValue={setCollege}/>
@@ -245,13 +247,13 @@ const Profile = () => {
             </div>}
             </TabPanel>
             <TabPanel>
-            <div className='w-[90%] bg-white box flex flex-col justify-center items-center h-[450px] mt-5 mx-auto z-20 translate-y-0'>
+            <div className='w-[90%] bg-white box flex flex-col justify-center items-center h-[450px] mt-5 mx-auto z-20 translate-y-0 profileCard'>
                 <img src='assets/images/qr.png' className='w-[550px] h-[550px]' alt='qr'/>
             </div>
             </TabPanel>
             <TabPanel>
                 
-            {(profileDetails&&profileComplete)&&<div className='w-[90%] box rounded-[15px] flex flex-col justify-center relative px-5 gap-1 h-[540px] mt-5 mx-auto'>
+            {(profileDetails&&profileComplete)&&<div className='w-[90%] box rounded-[15px] flex flex-col justify-center relative px-5 gap-1 mt-5 mx-auto h-[600px] profileCard'>
             <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
                 {profileDetails&&
                     profileDetails.events.map((item,index)=>{
@@ -260,6 +262,8 @@ const Profile = () => {
                         )
                     })
                 }
+                {(profileDetails&&profileDetails.events.length==0)&&<p className='text-white font-mono'>You Have Not Added Any Events</p>}
+                {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
                 <p className="text-lg font-mono text-white">Registration - ₹600/-</p>
                 <hr/>
                 {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
@@ -269,7 +273,7 @@ const Profile = () => {
                 {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
             </div>}
 
-            {(profileDetails&&!profileComplete)&&<div className='w-[90%] box mx-auto -translate-y-1 flex flex-col justify-center items-center px-5 gap-2 h-[540px]'>
+            {(profileDetails&&!profileComplete)&&<div className='w-[90%] box mx-auto -translate-y-1 flex flex-col justify-center items-center px-5 gap-2 h-[600px] profileCard'>
                 <p className='glitch text-xl text-white text-center'>Please Complete Your Profile To Continue</p>
                 </div>}
             </TabPanel>

@@ -165,9 +165,6 @@
         --border-angle: 1turn;
    }
 }
-.box:hover {
-    animation-play-state: paused;
-}
 @property --border-angle {
     syntax: "<angle>";
     inherits: true;

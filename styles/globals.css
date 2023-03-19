@@ -96,5 +96,13 @@ input[type=number]::-webkit-outer-spin-button {
     } 
   }
 
+  @media screen and (max-height:685px) {
+    .profileCard{
+      scale: 65%;
+      margin-top: -70px;
+    } 
+   
+  }
+
 
 

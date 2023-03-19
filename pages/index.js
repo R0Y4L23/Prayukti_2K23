@@ -71,11 +71,15 @@ const Index = () => {
           {/* <p className="text-center min-[1024px]:text-[80px] text-[50px] gravity tracking-[20px] hover:tracking-[25px] hover:text-[80px] duration-500 cursor-pointer min-[1024px]:mt-10 mt-32 min-[425px]:mx-0 mx-5 text-[#a4abfb] z-20 min-[768px]:-translate-y-1 -translate-y-20">Kalyuga</p> */}
           <img src='assets/images/kalyuga.png' className='mx-auto w-[750px] z-20 -translate-y-1' />
           <p onClick={()=>{router.push("/event")}} className="text-center min-[1024px]:text-[30px] text-[25px] gravity tracking-[10px]  z-20 min-[768px]:-translate-y-1 -translate-y-1 hover:tracking-[15px] hover:text-[40px] duration-500 cursor-pointer text-white">Launch | Clutch | Futurize</p>
-          <div className='flex flex-row justify-center items-center gap-5 mt-12 z-20 min-[768px]:-translate-y-1 -translate-y-4'>
+          <div className='flex flex-row justify-center items-center gap-5 mt-5 z-20 min-[768px]:-translate-y-1 -translate-y-4'>
           <a href='https://www.facebook.com/prayuktihith?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-blue-400 cursor-pointer"></i></a>
           <a href='https://instagram.com/prayuktihit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-blue-400 cursor-pointer mr-3"></i></a>
           <a href='https://www.facebook.com/rivierahithaldia?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-pink-400 cursor- ml-3"></i></a>
           <a href='https://instagram.com/rivierahit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-pink-400 cursor-pointer"></i></a>
+          </div>
+          <div className='flex flex-row justify-center items-center min-[425px]:gap-10 gap-6 z-20 translate-y-1'>
+            <p className='uppercase font-mono min-[425px]:text-lg text-white text-center'>Abhishek Kumar : 9798017924</p>
+            <p className='uppercase font-mono min-[425px]:text-lg text-white text-center'>Saurabh Kumar : 9546924407</p>
           </div>
       </div>
       </>
