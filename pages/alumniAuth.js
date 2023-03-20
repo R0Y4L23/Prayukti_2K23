@@ -71,7 +71,7 @@ const AlumniAuth = () => {
         <div className='authBg min-h-screen w-full relative flex flex-col justify-center items-center'>
             <div className='absolute top-0 bg-black h-screen w-full bg-opacity-40'>
             </div>
-           <div className={`authSize bg-black min-[930px]:w-2/3 w-[95%] h-[600px] bg-opacity-50 z-10 flex flex-col justify-center items-center gap-5 grid-cols-2`}>
+           <div className={`authSize bg-black min-[930px]:w-2/3 w-[95%] h-[600px] bg-opacity-50 z-10 flex flex-col justify-center items-center gap-10 grid-cols-2`}>
                 <div className="col-span-2">
                     <p className=" text-center text-white text-4xl font-mono glitch">Alumni Login</p>
                 </div>   

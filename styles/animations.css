@@ -159,6 +159,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     animation: bg-spin 3s linear infinite;
+    border-radius: 10px;
 }
 @keyframes bg-spin {
     to {

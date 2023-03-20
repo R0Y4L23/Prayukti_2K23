@@ -34,9 +34,9 @@ const Index = () => {
       <Head>
         <title>Prayukti | Riviera</title>
       </Head>
-      <div className="slide-in-bck-center home relative min-h-screen"> 
+      <div className="slide-in-bck-center home relative min-h-screen">
        <div className='absolute top-0 bg-black h-screen w-full bg-opacity-40'>
-         </div>    
+         </div>
           <div className="flex flex-row justify-between items-center min-[740px]:mx-20 min-[520px]:mx-8 mx-2 min-[1024px]:-translate-y-2 z-20">
             <div className='c1:block hidden'>
             <p className="text-white min-[1024px]:text-[15px] uppercase font-[100] min-[650px]:tracking-[15px] text-xl cursor-pointer hover:tracking-[17px] hover:text-[17px] duration-500 glitch z-20 -translate-y-1" onClick={() => {if(loggedIn)
@@ -46,7 +46,7 @@ const Index = () => {
                             }
                             else
                             {
-                            router.push("/auth") 
+                            router.push("/auth")
                             }}}>{loggedIn?"Logout":"Login"}</p>
             </div>
             <img src={"assets/images/logo.png"} alt="logo" className="min-[1024px]:w-[150px] min-[400px]:w-[180px] w-[150px] z-20 -translate-y-1" />
@@ -63,7 +63,7 @@ const Index = () => {
                             }
                             else
                             {
-                            router.push("/auth") 
+                            router.push("/auth")
                             }
                              }}>{loggedIn?"Logout":"Login"}</p>
             <p className="text-white text-lg cursor-pointer duration-500 glitch border border-white px-2 py-1" onClick={() => { router.push("/event") }}>Events</p>

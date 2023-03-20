@@ -69,7 +69,7 @@ const AlumniProfile = () => {
     const register=async ()=>{
         const storageRef = ref(storage, profileDetails.name+"_file_Alumni");
         uploadBytes(storageRef, file).then((snapshot) => {
-        console.log('Uploaded a blob or file!',snapshot);
+        //console.log('Uploaded a blob or file!',snapshot);
         getDownloadURL(storageRef).then(async (url)=>{
             await updateDoc(doc(firestore,"Alumni",uid),{
                 events:packageOfAlumni,

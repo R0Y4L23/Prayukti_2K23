@@ -91,18 +91,64 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media screen and (max-height:600px) {
     .authSize{
-      scale: 75%;
+      scale: 95%;
       margin-top: -50px;
     } 
   }
 
-  @media screen and (max-height:685px) {
-    .profileCard{
-      scale: 65%;
-      margin-top: -70px;
+  @media screen and (max-height:840px) {
+    .mobileCard{
+      transform: scaleY(80%);
+      margin-top: -10px;
     } 
+   
+  }
+
+  @media screen and (max-height:730px) {
+    .mobileCard{
+      transform: scaleY(70%);
+      margin-top: -55px;
+    } 
+   
+  }
+
+  @media screen and (max-height:650px) {
+    .mobileCard2{
+      transform: scaleY(80%);
+      margin-top: -10px;
+    } 
+    .mobileCard{
+        
+        margin-top: -95px;
+      } 
+   
+  }
+
+  @media screen and (max-height:600px) {
+    .mobileCard2{
+      transform: scaleY(60%);
+      margin-top: -30px;
+    } 
+    .mobileCard{
+        
+        margin-top: -115px;
+      } 
+   
+  }
+
+  @media screen and (max-height:583px) {
+    .eventMobile{
+      transform: scale(80%);
+
+    }
    
   }
 
 
 
+
+.prayukti-input{
+    font-size: 0.8rem;
+    border-radius: 7px;
+    padding: 0.65rem 1.2rem;
+}

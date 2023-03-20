@@ -160,7 +160,7 @@ const onTouchEnd = () => {
                             }}>{loggedIn?"Logout":"Login"}</p>
                         </div>
                     </div>
-                    <p className="text-center min-[1050px]:-mt-4 min-[778px]:-mt-8 min-[550px]:-mt-12 -mt-8 min-[550px]:text-[20px] text-[12px] text-white glitch tracking-[10px] min-[650px]:hover:tracking-[10px] min-[650px]:hover:text-[25px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To The Era Of Virtual Veda</p>
+                    <p className="text-center min-[1050px]:-mt-4 min-[778px]:-mt-8 min-[550px]:-mt-12 -mt-8 min-[550px]:text-[20px] text-[12px] text-white glitch tracking-[10px] duration-500 cursor-pointer text-flicker-out-glow">Welcome To The Era Of Virtual Veda</p>
                     <div className="w-full min-[650px]:flex flex-row mt-10 h-[500px] hidden">
                         <div className="min-[1050px]:w-[15%] min-[778px]:w-[20%] w-[25%] flex flex-col justify-center items-center">
                         <CyberpunkButton text={"_Previous"} onClick={()=>{if(current!=0)setCurrent(current-1)}} />

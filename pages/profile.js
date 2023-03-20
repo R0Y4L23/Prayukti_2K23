@@ -1,32 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React,{useState,useEffect} from 'react'
-
-import { firestore,storage } from '../firebase/config'
+import { firestore} from '../firebase/config'
 import {doc,onSnapshot,updateDoc} from "firebase/firestore"
-
-import {  ref, uploadBytes,getDownloadURL } from "firebase/storage";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
 import Head from 'next/head';
 import { toast } from 'react-toastify';
-
 import { useRouter } from 'next/router';
-
 import CyberpunkButton from '../components/cyberpunkButton';
+import Navigation from '../components/navigation';
 
 const InputField=({label,value,setValue,type})=>{
     return(
-        <div className="flex flex-row justify-center items-center">
-            <input value={value} onChange={(e)=>{setValue(e.target.value)}} type={type} className="p-2.5 text-white focus:outline-none bg-slate-600 rounded-[15px] w-[90%]" placeholder={label}/>
-        </div>
+        <input value={value} onChange={(e)=>{setValue(e.target.value)}} type={type} className="p-2.5 pl-5 text-[0.9rem] text-white focus:outline-none bg-slate-600 rounded-[7px] w-[90%]" placeholder={label}/>
     )
 }
 
 
 const Profile = () => {
-
-    const [tabIndex, setTabIndex] = useState(0);
     const router=useRouter()
 
     const events=[
@@ -54,16 +44,13 @@ const Profile = () => {
 
     const [profileDetails,setProfileDetails]=useState(null)
     const [uid,setUid]=useState("")
-
     const [profileComplete,setProfileComplete]=useState(false)
-
-    const [file,setFile]=useState(null)
-
     const [name,setName]=useState("")
     const [college,setCollege]=useState("")
     const [phone,setPhone]=useState(0)
     const [roll,setRoll]=useState("")
-    const [year,setYear]=useState("")
+    const [year,setYear]=useState("1st Year")
+    const [department,setDepartment]=useState("")
 
     useEffect(()=>{
         let u=sessionStorage.getItem("id")
@@ -77,8 +64,10 @@ const Profile = () => {
             setYear(doc.data().year)
             setRoll(doc.data().roll)
             setPhone(doc.data().contact)
-            if(!(doc.data().contact&&doc.data().college_name&&doc.data().year&&doc.data().roll&&doc.data().name))
+            setDepartment(doc.data().department)
+            if(!(doc.data().contact&&doc.data().college_name&&doc.data().year&&doc.data().roll&&doc.data().name&&doc.data().department))
             {
+                setYear("1st Year")
                 setProfileComplete(false)
             }
             else
@@ -94,24 +83,27 @@ const Profile = () => {
         }
     },[])
 
-    const register=async ()=>{
-
-        const storageRef = ref(storage, profileDetails.name+"file");
-        uploadBytes(storageRef, file).then((snapshot) => {
-        console.log('Uploaded a blob or file!',snapshot);
-        getDownloadURL(storageRef).then(async (url)=>{
-            await updateDoc(doc(firestore,"Users",uid),{
-                payment:url
-            })
-            toast.success("You Have Successfully Registered For The Events")
+    const removeEvent=async (id)=>{
+        //console.log("Removing")
+        let e=profileDetails.events
+        let a=[]
+        for(let i=0;i<e.length;i++)
+        {
+            if(e[i]["index"]!=id)
+            {
+                a.push(e[i])
+            }
+        }
+        await updateDoc(doc(firestore,"Users",uid),{
+            events:a
         })
-        });
+        toast.success("Successfully Removed An Event")
     }
 
    
     const updateProfileData=async ()=>{
 
-        if(name&&college&&roll&&year&&phone)
+        if(name&&college&&roll&&year&&phone&&department)
         {
         await updateDoc(doc(firestore,"Users",uid),{
             name:name,
@@ -119,13 +111,26 @@ const Profile = () => {
             roll:roll,
             year:year,
             contact:phone,
+            department:department
         })
+        setProfileComplete(true)
         toast.success("Profile Successfully Updated")
     }
     else
     {
         toast.error("Please Fill All The Details")
     }
+    }
+
+    const arrayIncludes=(array,index)=>{
+        for(let i=0;i<array.length;i++)
+        {
+            if(array[i]["index"]==index)
+            {
+                return true
+            }
+        }
+        return false
     }
 
   return (
@@ -136,148 +141,144 @@ const Profile = () => {
     <div className='profilePageBg w-full min-h-screen'>
         <div className='absolute top-0 bg-black h-screen w-full bg-opacity-60'>
         </div>
-        <div className='w-full h-[500px] min-[800px]:flex flex-row hidden justify-evenly items-center z-20 translate-y-10 mt-12'>
+        <Navigation/>
+        <div className='w-full h-[90vh] min-[768px]:flex flex-row hidden justify-evenly items-center z-20 translate-y-6 '>
             {(profileDetails&&profileComplete)&&
-            <div  className='w-[30%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
-                <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
-                <div className='mb-10 mt-4' >
-                    <p className='text-3xl font-semibold text-white text-center glitch'>{profileDetails.name}</p>
-                    <p className='uppercase tracking-[10px] text-white text-center'>{profileDetails.college_name}</p>
-                    <p className=' text-white text-center gravity mt-3'>-{profileDetails.email}</p>
+            <div  className='min-[1024px]:w-[40%] w-[54%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
+                <i className="fa-solid fa-pencil text-yellow-300 self-end text-lg -translate-x-10" onClick={()=>{setProfileComplete(false)}}></i>
+                <img src={'assets/images/avatar.jpg'} alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
+                <div className='mt-4' >
+                    <p className='text-3xl font-semibold text-white text-center glitch mb-5'>{profileDetails.name}</p>
+                    <hr className='my-3'/>
+                    <p className='uppercase tracking-[5px] text-white text-center font-bold'>{profileDetails.college_name}</p>
+                    <hr className='my-3'/>
                 </div>
-                <div className='flex flex-row justify-center items-center gap-14'>
-                    <div className='flex flex-col justify-center items-center'>
-                        <img alt='icon' src='assets/icons/college.png' className='w-[60px]'/>
-                        <p className='text-center text-white mt-2 gravity'>{profileDetails.roll}</p>
-                    </div>
-                    <div className='flex flex-col justify-center items-center'>
-                        <img alt='icon' src='assets/icons/year.png' className='w-[60px]'/>
-                        <p className='text-center text-white mt-2 gravity'>{profileDetails.year}</p>
-                    </div>
-                    <div className='flex flex-col justify-center items-center'>
-                        <img alt='icon' src='assets/icons/phone.png' className='w-[60px]'/>
-                        <p className='text-center text-white mt-2 gravity'>{profileDetails.contact}</p>
-                    </div>
+                <div className='mx-[84px]'>
+                    <p className='text-white mb-2 text-[12px] uppercase tracking-[5px] text-center'><span className="font-bold">College Roll No. :    </span><span>{profileDetails.roll}</span></p>
+                    <p className='text-white my-2 text-[12px] uppercase tracking-[5px] text-center'><span className="font-bold">Department :    </span><span>{profileDetails.department}</span></p>
+                    <p className='text-white my-2 text-[12px] uppercase tracking-[5px] text-center'><span className="font-bold">Year :    </span><span>{profileDetails.year}</span></p>
+                    <p className='text-white my-2 text-[12px] uppercase tracking-[5px] text-center'><span className="font-bold">Contact :    </span><span>{profileDetails.contact}</span></p>
+                    <p className='text-white my-2 text-[12px] uppercase tracking-[5px] text-center'><span className="font-bold">Email</span></p>
+                    <p className='text-white my-2 text-[12px] uppercase tracking-[5px] text-center'>{profileDetails.email}</p>
+                    <hr className='my-3'/>
+                    <hr className='mt-3'/>
                 </div>
             </div>}
             {(profileDetails&&!profileComplete)&&
-            <div className='w-[30%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
-                <p className='text-white text-xl glitch text-center'>Please Complete Your Profile</p>
+            <div className='min-[1024px]:w-[40%] w-[54%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
+                <p className='text-white text-xl glitch text-center mb-5'>Please Complete Your Profile</p>
                 <InputField label={"Name"} value={name} setValue={setName}/>
-                <InputField label={"College Name"} value={college} setValue={setCollege}/>
+                <InputField label={"Full College Name"} value={college} setValue={setCollege}/>
                 <InputField label={"College Roll No."} value={roll} setValue={setRoll}/>
-                <InputField label={"College Year"} value={year} setValue={setYear}/>
+                <select value={year} onChange={(e)=>{setYear(e.target.value)}} className="p-2.5 text-white focus:outline-none bg-slate-600 rounded-[15px] w-[90%]">
+                    <option value={"1st Year"}>1st Year</option>
+                    <option value={"2nd Year"}>2nd Year</option>
+                    <option value={"3rd Year"}>3rd Year</option>
+                    <option value={"4th Year"}>4th Year</option>
+                </select>
                 <InputField label={"Contact"} type="number" value={phone} setValue={setPhone} />
+                <InputField label={"Department"} type="text" value={department} setValue={setDepartment} />
+                <div className='mt-5'>
                 <CyberpunkButton text={"Save Data"} onClick={updateProfileData}/>
+                </div>
             </div>}
 
-            <div className='w-[30%] h-full bg-white box flex flex-col justify-center items-center'>
-                <img src='assets/images/qr.png' className='w-[550px] h-[550px]' alt='qr'/>
-            </div>
 
-            {(profileDetails&&profileComplete)&&<div className='w-[30%] box flex flex-col justify-center px-5 gap-2 h-full'>
-               
+            {(profileDetails&&profileComplete)&&<div className='min-[840px]:w-[40%] w-[45%] box flex flex-col justify-center py-10 px-10 gap-2 h-full'>
                 {profileDetails&&<>
                     <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
+                    {(profileDetails&&profileDetails.events.length==0)?<p className='text-white font-mono'>You Have Not Added Any Events</p>:<p className='text-white font-mono'>Your Events:</p>}
+                    <ul className='list-disc mb-2 pb-5 h-[200px]'>
                     {profileDetails.events.map((item,index)=>{
                         return(
-                            <p key={index} className="text-lg font-mono text-white">{events[item][0]} - ₹100/-</p>
+                            <li key={index} className="flex flex-row justify-between items-center px-10">
+                            <p className="text-lg font-mono text-white font-extrabold">○ {item.name}</p>
+                            <p><i className="fa-solid fa-trash text-red-600 text-lg translate-y-2 cursor-pointer" onClick={()=>{removeEvent(item.index)}}></i></p>
+                            </li>
                         )
                     })}
+                    </ul>
                     </>
                 }
-                 {(profileDetails&&profileDetails.events.length==0)&&<p className='text-white font-mono'>You Have Not Added Any Events</p>}
                  {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
-                <p className="text-lg font-mono text-white">Registration - ₹600/-</p>
                 <hr/>
-                {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
-                {!profileDetails.payment&&<p className='font-mono mb-5 text-white'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
-
-{!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
-                {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
-                {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
+                {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Registration Charge</span> <span>₹600/-</span></p>}
+                {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Events Charge</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100:profileDetails.events.length*100}/-</span></p>}
+                {(profileDetails&&arrayIncludes(profileDetails.events,10))&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Free Events</span> <span>Pradarshan</span></p>}
+                <hr/>
+                {profileDetails&&<p className="text-lg font-mono text-white flex flex-row justify-between items-center"><span>Total</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100+600:profileDetails.events.length*100+600}/-</span></p>}
+                <hr/>
+               <div className='flex flex-row justify-center items-center mt-5 gap-5'> {(profileDetails.events.length>0&&profileDetails.events.length<6)&&<CyberpunkButton text={"Add More Events"} onClick={()=>{router.push("/event")}} />}
+               {/* <CyberpunkButton text={"Pay Now"} onClick={()=>{router.push("/event")}} /> */}
+               </div>
             </div>}
-
-            {(profileDetails&&!profileComplete)&&<div className='w-[30%] box flex flex-col justify-center items-center px-5 gap-2 h-full'>
+        
+            {(profileDetails&&!profileComplete)&&<div className='min-[840px]:w-[40%] w-[45%] box flex flex-col justify-center items-center px-5 gap-2 h-full'>
                 <p className='glitch text-xl text-white text-center'>Please Complete Your Profile To Continue</p>
                 </div>}
-
-
         </div>
 
-        <Tabs className='mt-5 min-[800px]:hidden block'selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-            <TabList className={"flex flex-row justify-center border-b border-white"}>
-                <Tab><p className={tabIndex==0?'text-xl text-black':'text-xl text-white'}>Profile</p></Tab>
-                <Tab><p className={tabIndex==1?'text-xl text-black':'text-xl text-white'}>QR Code</p></Tab>
-                <Tab><p className={tabIndex==2?'text-xl text-black':'text-xl text-white'}>Events</p></Tab>
-            </TabList>
-            <TabPanel>
-            {(profileDetails&&profileComplete)&&
-            <div  className='w-[90%] h-[600px] py-10 flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto mt-5 profileCard'>
-                <img src='assets/images/avatar.jpg' alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
-                <div className='mb-10 mt-4' >
-                    <p className='text-3xl font-semibold text-white text-center glitch'>{profileDetails.name}</p>
-                    <p className='uppercase tracking-[10px] text-white text-center'>{profileDetails.college_name}</p>
-                    <p className=' text-white text-center gravity mt-3'>-{profileDetails.email}</p>
-                </div>
-                <div className='flex flex-row justify-center items-center gap-14'>
-                    <div className='flex flex-col justify-center items-center'>
-                        <img alt='icon' src='assets/icons/college.png' className='w-[60px]'/>
-                        <p className='text-center text-white mt-2 gravity'>{profileDetails.roll}</p>
-                    </div>
-                    <div className='flex flex-col justify-center items-center'>
-                        <img alt='icon' src='assets/icons/year.png' className='w-[60px]'/>
-                        <p className='text-center text-white mt-2 gravity'>{profileDetails.year}</p>
-                    </div>
-                    <div className='flex flex-col justify-center items-center'>
-                        <img alt='icon' src='assets/icons/phone.png' className='w-[60px]'/>
-                        <p className='text-center text-white mt-2 gravity'>{profileDetails.contact}</p>
-                    </div>
-                </div>
-            </div>}
-            {(profileDetails&&!profileComplete)&&
-            <div className='w-[90%] h-[600px] flex flex-col justify-center items-center relative px-5 gap-5 box mx-auto profileCard'>
-                <p className='text-white text-xl glitch text-center'>Please Complete Your Profile</p>
-                <InputField label={"Name"} value={name} setValue={setName}/>
-                <InputField label={"College Name"} value={college} setValue={setCollege}/>
-                <InputField label={"College Roll No."} value={roll} setValue={setRoll}/>
-                <InputField label={"College Year"} value={year} setValue={setYear}/>
-                <InputField label={"Contact"} type="number" value={phone} setValue={setPhone} />
-                <CyberpunkButton text={"Save Data"} onClick={updateProfileData}/>
-            </div>}
-            </TabPanel>
-            <TabPanel>
-            <div className='w-[90%] bg-white box flex flex-col justify-center items-center h-[450px] mt-5 mx-auto z-20 translate-y-0 profileCard'>
-                <img src='assets/images/qr.png' className='w-[550px] h-[550px]' alt='qr'/>
-            </div>
-            </TabPanel>
-            <TabPanel>
-                
-            {(profileDetails&&profileComplete)&&<div className='w-[90%] box rounded-[15px] flex flex-col justify-center relative px-5 gap-1 mt-5 mx-auto h-[600px] profileCard'>
-            <p className='text-center text-2xl underline font-mono text-white glitch mb-5'>Events Added</p>
-                {profileDetails&&
-                    profileDetails.events.map((item,index)=>{
-                        return(
-                            <p key={index} className="text-lg font-mono text-white">{events[item][0]} - ₹100/-</p>
-                        )
-                    })
-                }
-                {(profileDetails&&profileDetails.events.length==0)&&<p className='text-white font-mono'>You Have Not Added Any Events</p>}
-                {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
-                <p className="text-lg font-mono text-white">Registration - ₹600/-</p>
-                <hr/>
-                {profileDetails&&<p className="text-xl font-mono text-white">Total - ₹{profileDetails.events.length*100+600}/-</p>}
-                {!profileDetails.payment&&<p className='font-mono mb-5 text-white'>(Scan QR to Pay and Upload Screenshot to Register)</p>}
-                {!profileDetails.payment&&<input type={"file"} onChange={(e)=>{setFile(e.target.files[0])}}/>}
-                {(file&&!profileDetails.payment)&&<div className='flex flex-row justify-center items-center mt-10'><CyberpunkButton onClick={register} text="Register"/></div>}
-                {profileDetails.payment&&<p className='font-mono text-lg border-4 border-white text-white cursor-pointer px-3 py-1 text-center'>You Have Already Registered</p>}
-            </div>}
 
-            {(profileDetails&&!profileComplete)&&<div className='w-[90%] box mx-auto -translate-y-1 flex flex-col justify-center items-center px-5 gap-2 h-[600px] profileCard'>
-                <p className='glitch text-xl text-white text-center'>Please Complete Your Profile To Continue</p>
-                </div>}
-            </TabPanel>
-        </Tabs>
+
+
+
+        {profileDetails&&<div className='w-[95%] mx-auto h-auto min-[375px]:pb-5 pb-2 box z-20 translate-y-5 min-[768px]:hidden mobileCard2'>
+            <div className='flex flex-row justify-center items-center mt-5 min-[560px]:scale-100 scale-[80%]'>
+                {profileComplete?<div className='w-[90%] min-[560px]:p-5 p-2 relative'>
+                    <i className="fa-solid fa-pencil text-yellow-300 absolute right-0 top-0" onClick={()=>{setProfileComplete(false)}}></i>
+                    <p className='min-[560px]:text-2xl text-xl font-semibold text-white text-center glitch mb-2'>{profileDetails.name}</p>
+                    <p className='uppercase tracking-[5px] text-white text-center font-bold text-[15px]'>{profileDetails.college_name}</p>
+                    <hr className='my-3'/>
+                    <p className='text-white text-center tracking-[5px] uppercase text-[11px]'>{profileDetails.roll} || {profileDetails.year} || {profileDetails.contact} || {profileDetails.department}</p>
+                    <hr className='my-3'/>
+                    <p className=' text-white text-center min-[375px]:text-[15px] text-[13px] font-serif tracking-wider'>{profileDetails.email}</p>
+                </div>:<p className='text-white glitch h-[200px] text-center translate-y-6'>Please Complete Your Profile To Continue</p>}
+            </div>
+        </div>}
+        {(profileDetails&&profileComplete)&&<div className='w-[95%] mx-auto h-auto pb-5 box z-20 translate-y-5 min-[768px]:hidden mt-5 p-5 mobileCard'>
+        {profileDetails&&<>
+                    <p className='text-center text-2xl underline font-mono text-white glitch mb-5 mt-5'>Events Added</p>
+                    {(profileDetails&&profileDetails.events.length==0)?<p className='text-white font-mono'>You Have Not Added Any Events</p>:<p className='text-white font-mono'>Your Events:</p>}
+                    <ul className='list-disc mb-2 pb-5 '>
+                    {profileDetails.events.map((item,index)=>{
+                        return(
+                            <li key={index} className="flex flex-row justify-between items-center px-10">
+                            <p className="text-lg font-mono text-white font-extrabold">○ {item.name}</p>
+                            <p><i className="fa-solid fa-trash text-red-600 text-lg translate-y-2 cursor-pointer" onClick={()=>{removeEvent(item.index)}}></i></p>
+                            </li>
+                        )
+                    })}
+                    </ul>
+                    </>
+                }
+                 {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
+                <hr className='mt-5'/>
+                {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Registration Charge</span> <span>₹600/-</span></p>}
+                {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Events Charge</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100:profileDetails.events.length*100}/-</span></p>}
+                {(profileDetails&&arrayIncludes(profileDetails.events,10))&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Free Events</span> <span>Pradarshan</span></p>}
+                <hr/>
+                {profileDetails&&<p className="text-lg font-mono text-white flex flex-row justify-between items-center"><span>Total</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100+600:profileDetails.events.length*100+600}/-</span></p>}
+                <hr/>
+                <div className='flex flex-row justify-center items-center mt-5'>{(profileDetails.events.length>0&&profileDetails.events.length<6)&&<CyberpunkButton text={"Add More Events"} onClick={()=>{router.push("/event")}} />}
+                {/* <CyberpunkButton text={"Pay Now"} onClick={()=>{router.push("/event")}} /> */}
+                </div>
+        </div>}
+        {(profileDetails&&!profileComplete)&&<div className='w-[95%] mx-auto h-auto pb-5 box z-20 translate-y-5 min-[768px]:hidden mt-5 p-5 mobileCard flex flex-col justify-center items-center gap-5'>
+                <InputField label={"Name"} value={name} setValue={setName}/>
+                <InputField label={"Full College Name"} value={college} setValue={setCollege}/>
+                <InputField label={"College Roll No."} value={roll} setValue={setRoll}/>
+                <select value={year} onChange={(e)=>{setYear(e.target.value)}} className="p-2.5 text-white focus:outline-none bg-slate-600 rounded-[15px] w-[90%]">
+                    <option value={"1st Year"}>1st Year</option>
+                    <option value={"2nd Year"}>2nd Year</option>
+                    <option value={"3rd Year"}>3rd Year</option>
+                    <option value={"4th Year"}>4th Year</option>
+                </select>
+                <InputField label={"Contact"} type="number" value={phone} setValue={setPhone} />
+                <InputField label={"Department"} type="text" value={department} setValue={setDepartment} />
+                <div className='mt-5'>
+                <CyberpunkButton text={"Save Data"} onClick={updateProfileData}/>
+                </div>
+            </div>}
     </div>
     </>
   )
