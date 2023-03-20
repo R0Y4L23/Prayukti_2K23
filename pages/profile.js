@@ -145,7 +145,7 @@ const Profile = () => {
         <div className='w-full h-[90vh] min-[768px]:flex flex-row hidden justify-evenly items-center z-20 translate-y-6 '>
             {(profileDetails&&profileComplete)&&
             <div  className='min-[1024px]:w-[40%] w-[54%] h-full flex flex-col justify-center items-center relative px-5 gap-5 box'>
-                <i className="fa-solid fa-pencil text-yellow-300 self-end text-lg -translate-x-10" onClick={()=>{setProfileComplete(false)}}></i>
+                {!profileDetails.isPaid&&<i className="fa-solid fa-pencil text-yellow-300 self-end text-lg -translate-x-10" onClick={()=>{setProfileComplete(false)}}></i>}
                 <img src={'assets/images/avatar.jpg'} alt='avatar' className='w-[160px] h-[160px] rounded-[80px]'/>
                 <div className='mt-4' >
                     <p className='text-3xl font-semibold text-white text-center glitch mb-5'>{profileDetails.name}</p>
@@ -193,14 +193,14 @@ const Profile = () => {
                         return(
                             <li key={index} className="flex flex-row justify-between items-center px-10">
                             <p className="text-lg font-mono text-white font-extrabold">○ {item.name}</p>
-                            <p><i className="fa-solid fa-trash text-red-600 text-lg translate-y-2 cursor-pointer" onClick={()=>{removeEvent(item.index)}}></i></p>
+                            {!profileDetails.isPaid&&<p><i className="fa-solid fa-trash text-red-600 text-lg translate-y-2 cursor-pointer" onClick={()=>{removeEvent(item.index)}}></i></p>}
                             </li>
                         )
                     })}
                     </ul>
                     </>
                 }
-                 {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
+                 {(profileDetails&&profileDetails.events.length==0&&!profileDetails.isPaid)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
                 <hr/>
                 {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Registration Charge</span> <span>₹600/-</span></p>}
                 {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Events Charge</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100:profileDetails.events.length*100}/-</span></p>}
@@ -208,7 +208,11 @@ const Profile = () => {
                 <hr/>
                 {profileDetails&&<p className="text-lg font-mono text-white flex flex-row justify-between items-center"><span>Total</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100+600:profileDetails.events.length*100+600}/-</span></p>}
                 <hr/>
-               <div className='flex flex-row justify-center items-center mt-5 gap-5'> {(profileDetails.events.length>0&&profileDetails.events.length<6)&&<CyberpunkButton text={"Add More Events"} onClick={()=>{router.push("/event")}} />}
+               <div className='flex flex-row justify-center items-center mt-5 gap-5'> {(profileDetails.events.length>0&&profileDetails.events.length<6&&!profileDetails.isPaid)&&<CyberpunkButton text={"Add More Events"} onClick={()=>{router.push("/event")}} />}
+               {profileDetails.isPaid&&<div className='border border-white p-1 rounded-md'>
+                <p className='text-white text-center'>You Have Already Registered</p>
+                <p className='text-white text-center'>Slip Number : {profileDetails.slip_number} || Unique ID : {profileDetails.uniqueID}</p>
+                </div>}
                {/* <CyberpunkButton text={"Pay Now"} onClick={()=>{router.push("/event")}} /> */}
                </div>
             </div>}
@@ -225,7 +229,7 @@ const Profile = () => {
         {profileDetails&&<div className='w-[95%] mx-auto h-auto min-[375px]:pb-5 pb-2 box z-20 translate-y-5 min-[768px]:hidden mobileCard2'>
             <div className='flex flex-row justify-center items-center mt-5 min-[560px]:scale-100 scale-[80%]'>
                 {profileComplete?<div className='w-[90%] min-[560px]:p-5 p-2 relative'>
-                    <i className="fa-solid fa-pencil text-yellow-300 absolute right-0 top-0" onClick={()=>{setProfileComplete(false)}}></i>
+                {!profileDetails.isPaid&&<i className="fa-solid fa-pencil text-yellow-300 absolute right-0 top-0" onClick={()=>{setProfileComplete(false)}}></i>}
                     <p className='min-[560px]:text-2xl text-xl font-semibold text-white text-center glitch mb-2'>{profileDetails.name}</p>
                     <p className='uppercase tracking-[5px] text-white text-center font-bold text-[15px]'>{profileDetails.college_name}</p>
                     <hr className='my-3'/>
@@ -244,14 +248,14 @@ const Profile = () => {
                         return(
                             <li key={index} className="flex flex-row justify-between items-center px-10">
                             <p className="text-lg font-mono text-white font-extrabold">○ {item.name}</p>
-                            <p><i className="fa-solid fa-trash text-red-600 text-lg translate-y-2 cursor-pointer" onClick={()=>{removeEvent(item.index)}}></i></p>
+                            {!profileDetails.isPaid&&<p><i className="fa-solid fa-trash text-red-600 text-lg translate-y-2 cursor-pointer" onClick={()=>{removeEvent(item.index)}}></i></p>}
                             </li>
                         )
                     })}
                     </ul>
                     </>
                 }
-                 {(profileDetails&&profileDetails.events.length==0&&!profileDetails.payment)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
+                 {(profileDetails&&profileDetails.events.length==0&&!profileDetails.isPaid)&&<CyberpunkButton text={"Add Events"} onClick={()=>{router.push("/event")}}/>}
                 <hr className='mt-5'/>
                 {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Registration Charge</span> <span>₹600/-</span></p>}
                 {profileDetails&&<p className="text-[15px] font-mono text-white flex flex-row justify-between items-center"><span>Events Charge</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100:profileDetails.events.length*100}/-</span></p>}
@@ -259,7 +263,11 @@ const Profile = () => {
                 <hr/>
                 {profileDetails&&<p className="text-lg font-mono text-white flex flex-row justify-between items-center"><span>Total</span> <span>₹{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100+600:profileDetails.events.length*100+600}/-</span></p>}
                 <hr/>
-                <div className='flex flex-row justify-center items-center mt-5'>{(profileDetails.events.length>0&&profileDetails.events.length<6)&&<CyberpunkButton text={"Add More Events"} onClick={()=>{router.push("/event")}} />}
+                <div className='flex flex-row justify-center items-center mt-5'>{(profileDetails.events.length>0&&profileDetails.events.length<6&&!profileDetails.isPaid)&&<CyberpunkButton text={"Add More Events"} onClick={()=>{router.push("/event")}} />}
+                {profileDetails.isPaid&&<div className='border border-white p-1 rounded-md'>
+                <p className='text-white text-center'>You Have Already Registered</p>
+                <p className='text-white text-center'>Slip Number : {profileDetails.slip_number} || Unique ID : {profileDetails.uniqueID}</p>
+                </div>}
                 {/* <CyberpunkButton text={"Pay Now"} onClick={()=>{router.push("/event")}} /> */}
                 </div>
         </div>}
