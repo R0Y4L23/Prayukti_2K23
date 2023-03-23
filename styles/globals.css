@@ -144,11 +144,31 @@ input[type=number]::-webkit-outer-spin-button {
    
   }
 
-
-
-
 .prayukti-input{
     font-size: 0.8rem;
     border-radius: 7px;
     padding: 0.65rem 1.2rem;
 }
+
+
+@media screen and (min-height:742px) {
+  .prizeTable{
+    height: 500px;
+
+  }
+
+}
+
+@media screen and (max-height:742px) and (min-height:650px) {
+  .prizeTable{
+    height: 400px;
+  }
+}
+
+@media screen and (max-height:650px) {
+  .prizeTable{
+    height: 320px;
+  }
+}
+
+

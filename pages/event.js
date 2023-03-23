@@ -45,7 +45,7 @@ const onTouchEnd = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 3200)
+        }, 2000)
     }, [])
 
     useEffect(()=>{
@@ -141,13 +141,16 @@ const onTouchEnd = () => {
                 </div>
                 <div className="absolute top-0 left-0 h-[100vh] w-full z-20">
                     <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-4 -translate-y-2">
-                        <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[150px] w-[180px] cursor-pointer" onClick={() => { router.push("/") }} />
-                        <div className='flex flex-row justify-center items-center min-[550px}:gap-10 gap-5'>
-                        {loggedIn&&<p className="text-white border-white border px-4 bg-blue-300 bg-opacity-30 py-1 min-[550px]:text-[20px] text-[12px] uppercase font-[100] min-[550px]:tracking-[8px] tracking-[6px] cursor-pointer min-[650px]:hover:tracking-[15px] min-[650px]:hover:text-[25px] duration-500 gravity" onClick={() => { 
+                        <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[150px] min-[390px]:w-[180px] w-[140px] cursor-pointer" onClick={() => { router.push("/") }} />
+                        <div className='flex flex-row justify-center items-center min-[550px]:gap-8 gap-2'>
+                        <p className="text-white min-[550px]:text-[20px] cursor-pointer rounded text-[12px] border-white border min-[350px]:px-4 px-1 uppercase tracking-widest bg-blue-300 bg-opacity-30 py-1 gravity" onClick={() => { 
+                        router.push("/prizes")
+                        }}>Prizes</p>
+                        {loggedIn&&<p className="text-white rounded cursor-pointer min-[550px]:text-[20px] text-[12px] border-white border min-[350px]:px-4 px-1 uppercase tracking-widest bg-blue-300 bg-opacity-30 py-1 gravity" onClick={() => { 
 
                            router.push("/profile")
                             }}>Profile</p>}
-                        <p className="text-white min-[550px]:text-[20px] text-[12px] uppercase font-[100] min-[550px]:tracking-[10px] tracking-[8px] cursor-pointer min-[650px]:hover:tracking-[15px] min-[650px]:hover:text-[20px] duration-500 gravity" onClick={() => { 
+                        <p className="text-white min-[550px]:text-[20px] cursor-pointer text-[12px] uppercase font-[100] tracking-widest gravity" onClick={() => { 
                             if(loggedIn)
                             {
                                 sessionStorage.clear()
