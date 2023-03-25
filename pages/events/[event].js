@@ -51,6 +51,249 @@ useEffect(()=>{
     }
 },[])
 
+
+const prizes=[
+    {
+     "Event Name": "Requizzit",
+     "Event Type": "GK Quiz Event",
+     "Minimum No of Participant in group": 3,
+     "Maximum No of Participants in Group": 3,
+     "Total Prize Money*": 11000,
+     "1st Prize Worth": 5000,
+     "2nd Prize  Worth": 3000,
+     "3rd Prize Worth": 2000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "Robowar",
+     "Event Type": "Manual Robotics Event",
+     "Minimum No of Participant in group": 4,
+     "Maximum No of Participants in Group": 5,
+     "Total Prize Money*": 39000,
+     "1st Prize Worth": 20000,
+     "2nd Prize  Worth": 10000,
+     "3rd Prize Worth": 8000,
+     "4th Prize Worth": 1000,
+     "5th Prize Worth": 0
+    },
+    {
+     "Event Name": "Lakshya",
+     "Event Type": "Manual Robotics Event",
+     "Minimum No of Participant in group": 3,
+     "Maximum No of Participants in Group": 5,
+     "Total Prize Money*": 24000,
+     "1st Prize Worth": 10000,
+     "2nd Prize  Worth": 7000,
+     "3rd Prize Worth": 5000,
+     "4th Prize Worth": 1000,
+     "5th Prize Worth": 1000
+    },
+    {
+     "Event Name": "Udaan",
+     "Event Type": "RC Plane Event",
+     "Minimum No of Participant in group": 2,
+     "Maximum No of Participants in Group": 5,
+     "Total Prize Money*": 39000,
+     "1st Prize Worth": 20000,
+     "2nd Prize  Worth": 10000,
+     "3rd Prize Worth": 8000,
+     "4th Prize Worth": 1000,
+     "5th Prize Worth": 0
+    },
+    {
+     "Event Name": "B-Plan",
+     "Event Type": "Business Plan Contest",
+     "Minimum No of Participant in group": 2,
+     "Maximum No of Participants in Group": 4,
+     "Total Prize Money*": 13000,
+     "1st Prize Worth": 6000,
+     "2nd Prize  Worth": 4000,
+     "3rd Prize Worth": 2000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "House Of Hogwarts",
+     "Event Type": "Treasure Hunt Event",
+     "Minimum No of Participant in group": 4,
+     "Maximum No of Participants in Group": 4,
+     "Total Prize Money*": 17000,
+     "1st Prize Worth": 8000,
+     "2nd Prize  Worth": 5000,
+     "3rd Prize Worth": 3000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "Code-Blooded",
+     "Event Type": "Programming Contest",
+     "Minimum No of Participant in group": 1,
+     "Maximum No of Participants in Group": 1,
+     "Total Prize Money*": 15000,
+     "1st Prize Worth": 8000,
+     "2nd Prize  Worth": 4000,
+     "3rd Prize Worth": 2000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "Overnite",
+     "Event Type": "Problem Solving (Programming)",
+     "Minimum No of Participant in group": 1,
+     "Maximum No of Participants in Group": 4,
+     "Total Prize Money*": 14000,
+     "1st Prize Worth": 6000,
+     "2nd Prize  Worth": 4000,
+     "3rd Prize Worth": 3000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "DE-Movier",
+     "Event Type": "Short Film Contest",
+     "Minimum No of Participant in group": 5,
+     "Maximum No of Participants in Group": 8,
+     "Total Prize Money*": 24000,
+     "1st Prize Worth": 10000,
+     "2nd Prize  Worth": 7000,
+     "3rd Prize Worth": 5000,
+     "4th Prize Worth": 1000,
+     "5th Prize Worth": 1000
+    },
+    {
+     "Event Name": "LA-Photography",
+     "Event Type": "Photography Event",
+     "Minimum No of Participant in group": 1,
+     "Maximum No of Participants in Group": 1,
+     "Total Prize Money*": 10000,
+     "1st Prize Worth": 4000,
+     "2nd Prize  Worth": 3000,
+     "3rd Prize Worth": 2000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "Pradarshan",
+     "Event Type": "Model Presentation",
+     "Minimum No of Participant in group": 3,
+     "Maximum No of Participants in Group": 4,
+     "Total Prize Money*": 15000,
+     "1st Prize Worth": 6000,
+     "2nd Prize  Worth": 4000,
+     "3rd Prize Worth": 3000,
+     "4th Prize Worth": 1000,
+     "5th Prize Worth": 1000
+    },
+    {
+     "Event Name": "Crescent",
+     "Event Type": "Bridge Making Contest",
+     "Minimum No of Participant in group": 3,
+     "Maximum No of Participants in Group": 4,
+     "Total Prize Money*": 10000,
+     "1st Prize Worth": 4000,
+     "2nd Prize  Worth": 3000,
+     "3rd Prize Worth": 2000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+        "Event Name": "Naturgenix",
+        "Event Type": "To create a DIY perfume using alcohol base and natural essence ",
+        "Minimum No of Participant in group": 4,
+        "Maximum No of Participants in Group": 4,
+        "Total Prize Money*": 8000,
+        "1st Prize Worth": 4000,
+        "2nd Prize  Worth": 2000,
+        "3rd Prize Worth": 1000,
+        "4th Prize Worth": 500,
+        "5th Prize Worth": 500
+       },
+    {
+     "Event Name": "Squaroscope",
+     "Event Type": "solve a 3x3 rubics cube",
+     "Minimum No of Participant in group": 1,
+     "Maximum No of Participants in Group": 1,
+     "Total Prize Money*": 5700,
+     "1st Prize Worth": 2000,
+     "2nd Prize  Worth": 1500,
+     "3rd Prize Worth": 1000,
+     "4th Prize Worth": 700,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "HiTaTHON",
+     "Event Type": "Idea Submission Event",
+     "Minimum No of Participant in group": 4,
+     "Maximum No of Participants in Group": 5,
+     "Total Prize Money*": 8000,
+     "1st Prize Worth": 4000,
+     "2nd Prize  Worth": 2000,
+     "3rd Prize Worth": 1000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "See-QL",
+     "Event Type": "SQL Query Wiriting contest",
+     "Minimum No of Participant in group": 1,
+     "Maximum No of Participants in Group": 1,
+     "Total Prize Money*": 8000,
+     "1st Prize Worth": 4000,
+     "2nd Prize  Worth": 2000,
+     "3rd Prize Worth": 1000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+    {
+     "Event Name": "Fun Games",
+     "Minimum No of Participant in group": 1,
+     "Maximum No of Participants in Group": 1,
+     "Total Prize Money*": "...",
+     "1st Prize Worth": "...",
+     "2nd Prize  Worth": "...",
+     "3rd Prize Worth": "...",
+     "4th Prize Worth":"...",
+     "5th Prize Worth": "..."
+    },
+    {
+     "Event Name": " Valorant ",
+     "Minimum No of Participant in group": 5,
+     "Maximum No of Participants in Group": 5,
+     "Total Prize Money*": 22500,
+     "1st Prize Worth": 10000,
+     "2nd Prize  Worth": 7500,
+     "3rd Prize Worth": 5000,
+     "4th Prize Worth": 0,
+     "5th Prize Worth": 0
+    },
+    {
+     "Event Name": "IoT Tech Expo",
+     "Event Type": "IoT based model event",
+     "Minimum No of Participant in group": 2,
+     "Maximum No of Participants in Group": 3,
+     "Total Prize Money*": 11000,
+     "1st Prize Worth": 5000,
+     "2nd Prize  Worth": 3000,
+     "3rd Prize Worth": 2000,
+     "4th Prize Worth": 500,
+     "5th Prize Worth": 500
+    },
+   ]
+
+
+//    {
+//     "Event Name": "COD Mobile ",
+//     "Minimum No of Participant in group": 4,
+//     "Maximum No of Participants in Group": 4,
+//     "Total Prize Money*": 16000,
+//     "1st Prize Worth": 8000,
+//     "2nd Prize  Worth": 5000,
+//     "3rd Prize Worth": 3000,
+//     "4th Prize Worth": 0,
+//     "5th Prize Worth": 0
+//    },
+
 const events=[
     ["Requizzit","Level up your brains, and thrive on to win.","requizzit","Nothing is constant for a reason, even the smallest of things around us are changing rapidly. Are you up to date about that? Are you aware of all the current affairs? Are you the ready to test your knowledge and have fun at the same time? Buckle up your minds, grab all your knowledge, to be a part of the most brain picking quiz of the year.","https://firebasestorage.googleapis.com/v0/b/prayukti-2k23.appspot.com/o/PDFs%2FRequizzit.pdf?alt=media&token=11476931-36a5-4724-8b0b-e6013b96300e"],
     ["Robowar","Combat with your bots, and let their best win","robowar","A game of style, control, damage and aggression with the robots competing against each other in a deadly combat. Strategise your bots now because it's time to rumble. Get ready to witness the most savage and treacherous war of hits and clashes.","https://firebasestorage.googleapis.com/v0/b/prayukti-2k23.appspot.com/o/PDFs%2FRobowar.pdf?alt=media&token=c16717cd-4256-43c4-a024-a2723649b8a0"],
@@ -134,11 +377,110 @@ return (
         <div className='w-[40%] flex flex-col justify-center items-center min-h-screen gap-5'>
             <img src={'/assets/images/events/'+events[id-1][2]+'.jpg'} alt='event-page' className='mx-auto w-[80%] rounded-[15px]' />
         </div>
-        <div className='w-[60%] flex flex-col justify-center items-center gap-10'>
+        <div className='w-[60%] flex flex-col justify-center items-center gap-5'>
             <p className='text-4xl text-center text-white underline glitch'>{events[id-1][0]}:</p>
             <p className='text-xl text-center text-white glitch'>{events[id-1][1]}</p>
             <p className='text-center text-white font-mono'>{events[id-1][3]}</p>
-            {loggedIn&&<div className='flex flex-row justify-center items-center gap-5'>{!isPaid&&<CyberpunkButton text={ arrayIncludes(eventRegistered,id-1)?"Remove Event":"Add Event"} onClick={()=>{
+            <table className="text-sm text-left text-gray-500">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-300">
+                        <tr>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2">
+                                Total Prize Money Worth*
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2">
+                                1st Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2">
+                                2nd Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2">
+                                3rd Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2">
+                                4th Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2">
+                                5th Prize Worth
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {id!=18?<tr className="bg-gray-800">
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['Total Prize Money*']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['1st Prize Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['2nd Prize  Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['3rd Prize Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['4th Prize Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['5th Prize Worth']}
+                            </td></tr> :<>
+
+                            <tr className="bg-gray-800">
+                                <td colSpan={6} className="min-[550px]:px-6 px-2 font-bold text-white text-lg">Valorant : </td>
+                            </tr>
+
+                            <tr className="bg-gray-800">
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 22500
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 10000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 7500
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 5000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td></tr>
+
+                            <tr className="bg-gray-800">
+                                <td colSpan={6} className="min-[550px]:px-6 px-2 font-bold text-white text-lg">COD Mobile : </td>
+                            </tr>
+
+                            <tr className="bg-gray-800">
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 16000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 8000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 5000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 3000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td></tr>
+
+                            </>}
+                    </tbody>
+                </table>
+                <div className=' self-start  -translate-y-4'>
+                    <p className='text-white text-[10px]'>*Prize Money Worth can be increased depending on the total number of participants.</p>
+                    <p className='text-white text-[10px]'>**Event can be cancelled if number of participants is remarkably low.</p>
+                </div>
+                <div className='flex flex-row justify-center items-center gap-5'>{loggedIn&&<>{!isPaid&&<CyberpunkButton text={ arrayIncludes(eventRegistered,id-1)?"Remove Event":"Add Event"} onClick={()=>{
                 //console.log("Clicked")
                 if(arrayIncludes(eventRegistered,id-1))
                 {
@@ -147,12 +489,11 @@ return (
                 else
                 {
                     if(eventRegistered.length<6)
-                    addEvent()
+                    addEvent() 
                     else
                     toast.error("Limit : 6 Events")
                 }
-            }}/>}<CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></div>}
-           <a href={"assets/pdfs/"+events[id-1][2]+".pdf"} target="_blank"><CyberpunkButton text={"View Rules And Details"} onClick={()=>{}}/></a>
+            }}/>}<CyberpunkButton text={"View My Events"} onClick={()=>{router.push("/profile")}}/></>}<a href={"assets/pdfs/"+events[id-1][2]+".pdf"} target="_blank"><CyberpunkButton text={"View Rules And Details"} onClick={()=>{}}/></a></div>
             {!loggedIn&&<p className='text-center text-white cursor-pointer uppercase font-mono' onClick={()=>{router.push("/auth")}}>Please Login To Add Events</p>}
         </div>
     </div>
@@ -188,7 +529,108 @@ return (
                  </div>
             </TabPanel>
             <TabPanel>
-            <p className='text-center text-white min-[700px]:text-[20px] min-[470px]:text-[18px] text-[15px] mx-5 font-mono'>{events[id-1][3]}</p>
+            <p className='text-center text-white min-[700px]:text-[20px] min-[470px]:text-[18px] text-[15px] mx-5 font-mono eventTextHeight'>{events[id-1][3]}</p>
+            <div className='min-[845px]:w-2/3 min-[690px]:w-[80%] w-[99%] mx-auto mt-5'>
+            <table className="text-sm text-left text-gray-500 min-[375px]:overflow-x-hidden overflow-x-scroll">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-300">
+                        <tr>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2 min-[375px]:text-[10px] text-[8px]">
+                                Total Prize Money Worth*
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2 min-[375px]:text-[10px] text-[8px]">
+                                1st Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2 min-[375px]:text-[10px] text-[8px]">
+                                2nd Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2 min-[375px]:text-[10px] text-[8px]">
+                                3rd Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2 min-[375px]:text-[10px] text-[8px]">
+                                4th Prize Worth
+                            </th>
+                            <th scope="col" className="min-[550px]:px-6 px-2 min-[550px]:py-3 py-2 min-[375px]:text-[10px] text-[8px]">
+                                5th Prize Worth
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {id!=18?<tr className="bg-gray-800">
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['Total Prize Money*']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['1st Prize Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['2nd Prize  Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['3rd Prize Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['4th Prize Worth']}
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ {prizes[id-1]['5th Prize Worth']}
+                            </td></tr> :<>
+
+                            <tr className="bg-gray-800">
+                                <td colSpan={6} className="min-[550px]:px-6 px-2 font-bold text-white text-lg">Valorant : </td>
+                            </tr>
+
+                            <tr className="bg-gray-800">
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 22500
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 10000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 7500
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 5000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td></tr>
+
+                            <tr className="bg-gray-800">
+                                <td colSpan={6} className="min-[550px]:px-6 px-2 font-bold text-white text-lg">COD Mobile : </td>
+                            </tr>
+
+                            <tr className="bg-gray-800">
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 16000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 8000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 5000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 3000
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td>
+                            <td className="min-[550px]:px-6 px-2 min-[550px]:py-4 py-2 font-bold text-white">
+                            ₹ 0
+                            </td></tr>
+
+                            </>}
+                    </tbody>
+                </table>
+                <div className=' self-start mx-auto'>
+                    <p className='text-white text-[10px]'>*Prize Money Worth can be increased depending on the total number of participants.</p>
+                    <p className='text-white text-[10px]'>**Event can be cancelled if number of participants is remarkably low.</p>
+                </div>
+                </div>
             </TabPanel>
         </Tabs>
     </div>

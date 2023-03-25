@@ -143,9 +143,6 @@ const onTouchEnd = () => {
                     <div className="flex flex-row justify-between items-center min-[650px]:mx-20 min-[550px]:mx-8 mx-2 min-[550px]:-translate-y-4 -translate-y-2">
                         <img src={"assets/images/logo.png"} alt="logo" className="min-[550px]:w-[150px] min-[390px]:w-[180px] w-[140px] cursor-pointer" onClick={() => { router.push("/") }} />
                         <div className='flex flex-row justify-center items-center min-[550px]:gap-8 gap-2'>
-                        <p className="text-white min-[550px]:text-[20px] cursor-pointer rounded text-[12px] border-white border min-[350px]:px-4 px-1 uppercase tracking-widest bg-blue-300 bg-opacity-30 py-1 gravity" onClick={() => { 
-                        router.push("/prizes")
-                        }}>Prizes</p>
                         {loggedIn&&<p className="text-white rounded cursor-pointer min-[550px]:text-[20px] text-[12px] border-white border min-[350px]:px-4 px-1 uppercase tracking-widest bg-blue-300 bg-opacity-30 py-1 gravity" onClick={() => { 
 
                            router.push("/profile")
