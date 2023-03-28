@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Loading from '../components/loading'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Link from 'next/link'
 
 const Index = () => {
   const [loading, setLoading] = useState(true)
@@ -76,10 +77,10 @@ const Index = () => {
           <img src='assets/images/kalyuga.png' className='mx-auto w-[750px] z-20 -translate-y-1' />
           <p onClick={()=>{router.push("/event")}} className="text-center min-[1024px]:text-[30px] text-[25px] gravity tracking-[10px]  z-20 min-[768px]:-translate-y-1 -translate-y-1 hover:tracking-[15px] hover:text-[40px] duration-500 cursor-pointer text-white">Launch | Clutch | Futurize</p>
           <div className='flex flex-row justify-center items-center gap-5 mt-5 z-20 min-[768px]:-translate-y-1 -translate-y-4'>
-          <a href='https://www.facebook.com/prayuktihith?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-blue-400 cursor-pointer"></i></a>
-          <a href='https://instagram.com/prayuktihit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-blue-400 cursor-pointer mr-3"></i></a>
-          <a href='https://www.facebook.com/rivierahithaldia?mibextid=ZbWKwL'><i className="fa-brands fa-facebook text-[30px] text-pink-400 cursor- ml-3"></i></a>
-          <a href='https://instagram.com/rivierahit?igshid=YmMyMTA2M2Y='><i className="fa-brands fa-instagram text-[30px] text-pink-400 cursor-pointer"></i></a>
+          <Link href='https://www.facebook.com/prayuktihith?mibextid=ZbWKwL' target={"_blank"}><i className="fa-brands fa-facebook text-[30px] text-blue-400 cursor-pointer"></i></Link>
+          <Link href='https://instagram.com/prayuktihit?igshid=YmMyMTA2M2Y=' target={"_blank"}><i className="fa-brands fa-instagram text-[30px] text-blue-400 cursor-pointer mr-3"></i></Link>
+          <Link href='https://www.facebook.com/rivierahithaldia?mibextid=ZbWKwL' target={"_blank"}><i className="fa-brands fa-facebook text-[30px] text-pink-400 cursor- ml-3"></i></Link>
+          <Link href='https://instagram.com/rivierahit?igshid=YmMyMTA2M2Y=' target={"_blank"}><i className="fa-brands fa-instagram text-[30px] text-pink-400 cursor-pointer"></i></Link>
           </div>
           <div className='flex flex-row justify-center items-center min-[425px]:gap-10 gap-6 z-20 translate-y-1'>
             <p className='uppercase font-mono min-[425px]:text-lg text-white text-center'>Abhishek Kumar : 9798017924</p>

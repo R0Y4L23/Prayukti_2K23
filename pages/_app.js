@@ -18,7 +18,6 @@ function MyApp({ Component, pageProps }) {
 
 <>
 <Head>
-<meta name="google-site-verification" content="NO75LCdR3fP9T_rJemeTDAjA8Ac4IFqRauRS6YejaFc" />
 </Head>
   <TransitionEffect>
     <Component {...pageProps} />

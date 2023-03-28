@@ -508,7 +508,7 @@ return (
             <TabPanel className={"flex flex-col justify-center items-center eventMobile"}>
             <img src={'/assets/images/events/'+events[id-1][2]+'.jpg'} alt='event-page' className='mx-auto w-[300px] rounded-[15px] mt-10' />
             <div className='flex flex-row justify-center items-center mt-5'>
-            <a href={"assets/pdfs/"+events[id-1][2]+".pdf"} target="_blank"><CyberpunkButton text={"View Rules And Details"} onClick={()=>{}}/></a>
+            <Link href={"assets/pdfs/"+events[id-1][2]+".pdf"} target="_blank"><CyberpunkButton text={"View Rules And Details"} onClick={()=>{}}/></Link>
             </div>
             <div  className={"flex flex-row justify-center items-center mt-5 w-full"}>
                  {loggedIn&&<>{!isPaid&&<CyberpunkButton text={arrayIncludes(eventRegistered,id-1)?"Remove Event":"Add Event"} className="mx-auto" onClick={()=>{
