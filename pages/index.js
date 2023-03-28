@@ -55,7 +55,7 @@ const Index = () => {
             <img src={"assets/images/logo.png"} alt="logo" className="min-[1024px]:w-[150px] min-[664px]:w-[180px] w-[150px] z-20 -translate-y-1" />
             <img src={"assets/images/riviera_logo.png"} alt="logo" className="min-[1024px]:w-[150px] min-[664px]:w-[180px] w-[150px] z-20 -translate-y-1" />
             <div className='c1:flex hidden  flex-row justify-center items-center min-[795px]:gap-8 gap-3'>
-            <p className="text-white uppercase font-[100] min-[1024px]:text-lg min-[795px]:text-[12px] text-[8px] cursor-pointer hover:text-[20px] duration-500 glitch z-20 -translate-y-1" onClick={()=>{router.push("/assets/PDFs/workshops.pdf")}}>Workshops</p>
+            <p className="text-white uppercase font-[100] min-[1024px]:text-lg min-[795px]:text-[12px] text-[8px] cursor-pointer hover:text-[20px] duration-500 glitch z-20 -translate-y-1" onClick={()=>{router.push("/workshops")}}>Workshops</p>
             <p className="text-white uppercase font-[100] min-[1024px]:text-lg min-[795px]:text-[12px] text-[8px] cursor-pointer hover:text-[20px] duration-500 glitch z-20 -translate-y-1" onClick={() => { router.push("/event") }}>Events</p>
             </div>
           </div>
@@ -70,7 +70,7 @@ const Index = () => {
                             }
                              }}>{loggedIn?"Profile":"Login"}</p>
                              <p className="text-white min-[425px]:text-[12px] text-[8px] cursor-pointer duration-500 glitch border border-white px-2 py-1" onClick={()=>{router.push("/attractions")}}>Attractions</p>
-                             <p className="text-white min-[425px]:text-[12px] text-[8px] cursor-pointer duration-500 glitch border border-white px-2 py-1" onClick={()=>{router.push("/assets/PDFs/workshops.pdf")}}>Workshops</p>
+                             <p className="text-white min-[425px]:text-[12px] text-[8px] cursor-pointer duration-500 glitch border border-white px-2 py-1" onClick={()=>{router.push("/workshops")}}>Workshops</p>
             <p className="text-white min-[425px]:text-[12px] text-[8px] cursor-pointer duration-500 glitch border border-white px-2 py-1" onClick={() => { router.push("/event") }}>Events</p>
           </div>
           {/* <p className="text-center min-[1024px]:text-[80px] text-[50px] gravity tracking-[20px] hover:tracking-[25px] hover:text-[80px] duration-500 cursor-pointer min-[1024px]:mt-10 mt-32 min-[425px]:mx-0 mx-5 text-[#a4abfb] z-20 min-[768px]:-translate-y-1 -translate-y-20">Kalyuga</p> */}

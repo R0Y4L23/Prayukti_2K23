@@ -184,4 +184,11 @@ input[type=number]::-webkit-outer-spin-button {
   background-size: cover;
 }
 
+.wbg{
+  background: url(../public/assets/images/workshop_bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
