@@ -10,6 +10,31 @@ const provider = new GoogleAuthProvider();
 
 const Admin = () => {
 
+
+    const events=[
+
+        ["Requizzit","Level up your brains, and thrive on to win.","requizzit"],
+        ["Robowar","Combat with your bots, and let their best win","robowar"],
+        ["Lakshya","Reach your destination at your risk","lakshya"],
+        ["Udaan","Be the pilot you always dreamt","udaan"],
+        ["B-Plan","Potential unicorn or just following the herd trail. Dare to pitch?","bplan"],
+        ["House Of Hogwarts","Wand your way to Hogwarts Hunt","hogwarts"],
+        ["Code-Blooded","Code is poetry, let your Imagination run wild.","code"],
+        ["Overnite","Let the code leave your competitiors in the byte dust","overnite"],
+        ["DE-Movier","Lights Out, Imagination on. Let your creation that leaves a lasting impression.","demovier"],
+        ["LA-Photography","Let the lens do the talking of a story unknown","laphotography"],
+        ["Pradarshan","Let the creativity build around technology","pradarshan"],
+        ["Crescent","Whose bridge withstands the London Bridge?","crescent"],
+        ["Naturgenix","Create from our natural foundations.","naturgenix"],
+        ["Squaroscope","Quick hands, sharp minds, and a Rubik's Cube- let the speed-cubing competition begin!","squaroscope"],
+        ["HiTaTHON","","hitathon"],
+        ["See-QL","","sql"],
+        ["Fun Games","Coming Soon","fungames"],
+        ["Online Games","To Be Revealed Soon!","games"],
+        ["IoT Tech Expo","Expose connections that build the future","iot"]
+    ]
+
+
     const router=useRouter()
 
     const [adminLoggedIn,setAdminLoggedIn]=useState(false)
@@ -19,6 +44,8 @@ const Admin = () => {
     const [profileDetails,setProfileDetails]=useState(null)
     const [uid,setUId]=useState(null)
     const [enteredBy,setEnteredBy]=useState(null)
+
+    const [eventToBeAdded,setEventToBeAdded]=useState(0)
 
     const setAllDefaults=()=>{
         setSearch("")
@@ -140,6 +167,24 @@ querySnapshot.forEach((doc) => {
     return false
 }
 
+const addEvent=async ()=>{
+    if(eventToBeAdded)
+    {
+
+        let e=profileDetails.events
+        e.push({"index":eventToBeAdded,"name":events[eventToBeAdded][0]})
+        await updateDoc(doc(firestore,"Users",uid),{
+            events:e
+        })
+        setEventToBeAdded(0)
+        toast.success("Successfully Added An Event")
+    }
+    else
+    {
+        toast.error("Select Event First")
+    }
+}
+
   return (
     <div className='flex flex-col justify-center items-center'>
         {!adminLoggedIn&&<div onClick={googleSignIn} className="w-[300px] flex flex-row rounded-xl min-[650px]:scale-100 min-[424px]:scale-[65%] scale-[55%] cursor-pointer">
@@ -168,6 +213,16 @@ querySnapshot.forEach((doc) => {
                             <p className='text-green-500' key={index}>{item.name}</p>
                         )
                     })}
+                    <div className='flex flex-row justify-center gap-10'>
+                        <select className='text-black' value={eventToBeAdded} onChange={(e)=>{setEventToBeAdded(e.target.value)}}>
+                            {events.map((item,index)=>{
+                                return(
+                                    <option className='text-black' key={index} value={index}>{item[0]}</option>
+                                )
+                            })}
+                        </select>
+                        <button className='ml-2 text-black bg-white'  onClick={addEvent}>Add Event</button>
+                    </div>
                     {!profileDetails.isPaid?<><p className='mt-5'>Amount To Pay:{arrayIncludes(profileDetails.events,10)?(profileDetails.events.length-1)*100+600:profileDetails.events.length*100+600}</p>
                     <input value={slipNumber} placeholder="Slip Number" className='p-2 my-2 text-black' onChange={(e)=>{setSlipNumber(e.target.value)}}/>
                     <select value={paymentMode} className="text-black my-2" onChange={(e)=>{setPaymentMode(e.target.value)}}>

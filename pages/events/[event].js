@@ -312,7 +312,7 @@ const events=[
     ["HiTaTHON","","hitathon","","https://firebasestorage.googleapis.com/v0/b/prayukti-2k23.appspot.com/o/PDFs%2FHitathon.pdf?alt=media&token=368951d8-d7f4-4fe7-9874-07ec3f5db80a"],
     ["See-QL","","sql","candidates will be tested with their SQL query writing ability, to analyze results of query,explore feautures of writing queries in SQL , problem solving and data fetching ability.",""],
     ["Fun Games","Push ups, Arm Wrestling, Skipping","fungames","",""],
-    ["Online Games","To Be Revealed Soon!","games","To Be Revealed Soon!",""],
+    ["Online Games","COD Mobile & Valorant","games","COD Mobile & Valorant",""],
     ["IoT Tech Expo","Expose connections that build the future","iot","To Be Revealed Soon!","https://firebasestorage.googleapis.com/v0/b/prayukti-2k23.appspot.com/o/PDFs%2FIottechexpo.pdf?alt=media&token=71f8f2cc-3e48-4164-a6ce-a0c94f3d162a"]
 ]
 

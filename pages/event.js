@@ -82,7 +82,7 @@ const onTouchEnd = () => {
 
         [["See-QL","","sql",16],
         ["Fun Games","To Be Revealed Soon!","fungames",17],
-        ["Online Games","To Be Revealed Soon!","games",18]],
+        ["Online Games","COD Mobile & Valorant","games",18]],
 
         [["IoT Tech Expo","Expose connections that build the future","iot",19]]
     ]
@@ -111,7 +111,7 @@ const onTouchEnd = () => {
 
         ["See-QL","","sql"],
         ["Fun Games","Coming Soon","fungames"],
-        ["Online Games","To Be Revealed Soon!","games"],
+        ["Online Games","COD Mobile & Valorant","games"],
 
         ["IoT Tech Expo","Expose connections that build the future","iot"]
     ]
