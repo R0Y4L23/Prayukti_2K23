@@ -168,9 +168,6 @@ querySnapshot.forEach((doc) => {
 }
 
 const addEvent=async ()=>{
-    if(eventToBeAdded)
-    {
-
         let e=profileDetails.events
         e.push({"index":eventToBeAdded,"name":events[eventToBeAdded][0]})
         await updateDoc(doc(firestore,"Users",uid),{
@@ -178,11 +175,6 @@ const addEvent=async ()=>{
         })
         setEventToBeAdded(0)
         toast.success("Successfully Added An Event")
-    }
-    else
-    {
-        toast.error("Select Event First")
-    }
 }
 
   return (
